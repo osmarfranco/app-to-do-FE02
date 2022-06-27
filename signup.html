@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do App</title>
+
+  <!-- ---------------- estilos compartilhados entre login e signup ---------------- -->
+  <link rel="stylesheet" href="./styles/acesso.css">
+
+  <!-- ---------------------- lógica aplicada no registro -------------------- -->
+  <script src="./scripts/validation.js" defer></script>
+  <script src="./scripts/signup.js" defer></script>
+
+</head>
+
+<body>
+
+  <div class="left">
+    <img src="./assets/pessoa-signup.png" alt="">
+  </div>
+  <div class="right">
+    <form>
+      <div class="form-header">
+        <p>To-Do App</p>
+      </div>
+
+      <label>
+        Nome:
+        <input type="text" id="inputName">
+      </label>
+      <small id="nameValidation"></small>
+      <label>
+        Sobrenome:
+        <input type="text" id="inputSurname">
+      </label>
+      <small id="surnameValidation"></small>
+      <label>
+        Email:
+        <input type="email" id="inputEmail">
+      </label>
+      <small id="emailValidation"></small>
+      <label>
+        Senha:
+        <input type="password" id="inputPassword">
+      </label>
+      <small id="passwordValidation"></small>
+      <label>
+        Repetir senha:
+        <input type="password" id="inputRepeatPassword">
+      </label>
+      <small id="repeatPasswordValidation"></small>
+
+      <button id="createAcc" class="blocked-button" disabled>Criar conta</button>
+
+    </form>
+    <div class="ingressar">
+      <a href="./index.html">Já possui conta? Acesse aqui</a>
+    </div>
+  </div>
+
+</body>
+
+</html>
