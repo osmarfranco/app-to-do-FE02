@@ -10,7 +10,6 @@ let token
 
 /* Altera o botão de acesso quando está bloqueado */
 botaoLogin.style.backgroundColor = "#979292A1";
-botaoLogin.innerText = "Acessar";
 
 
 /* Define um objeto para o usuário */
@@ -28,12 +27,12 @@ botaoLogin.addEventListener("click", function (evento) {
         evento.preventDefault();
 
         /* Normalização das informações*/
-        emailLogin = normalizaTextoRetiraEspacos(emailLogin.value);
-        ;
+        emailTratado = normalizaTextoRetiraEspacos(emailLogin.value);
+        passwordTratado = normalizaTextoRetiraEspacos(passwordLogin.value);
 
         //Atribui as informações normalizadas ao objeto do usuário (em JS)
-        objetoUsuario.email = emailLogin
-        objetoUsuario.password = passwordLogin.value;
+        objetoUsuario.email = emailTratado
+        objetoUsuario.password = passwordTratado;
 
 
         //Transforma o objeto JS em objeto JSON(textual)
@@ -85,8 +84,12 @@ botaoLogin.addEventListener("click", function (evento) {
 });
 
 function loginSucesso(resultadoSucesso) {
-    sessionStorage.setItem("authorization", resultadoSucesso.jwt)
-    token = sessionStorage.getItem("authorization")
+    sessionStorage.setItem("jwt", resultadoSucesso.jwt)
+    token = sessionStorage.getItem("jwt")
+    setTimeout(() => {
+        location.href = "tarefas.html"
+    }, 1000);
+    
     console.log(token);
     const toast = new bootstrap.Toast(toastSucesso)
 
@@ -101,6 +104,37 @@ function loginErro(resultadoErro) {
     toast.show()
     
 }
+
+/* async function loginApi() {
+
+    let configRequest = {
+        method:"POST",
+        headers: {
+            "Content-type": "Application/json"
+        },
+        body: objetoUsuarioEmJson
+    }
+
+    try{
+    let resposta = await fetch("https://ctd-todo-api.herokuapp.com/v1/users/login", configRequest);
+    
+    if(resposta.status == 201 || resposta.status == 200) {
+
+        let respostaFinal = await resposta.json()
+    } else {
+        throw resposta
+    }
+
+    } catch (error) {
+        //Verifica os status de "senha incorreta ou email incorreto"
+        if (error.status == 400 || error.status == 404) {
+            //Ao obter algum desses status, chama a função erro no login
+            loginErro("Email e/ou senha inválidos");
+            
+        }
+    }
+
+} */
 
 
 /* Verificando o input de email */
@@ -150,14 +184,12 @@ function validaLogin(email, password) {
         //True
         botaoLogin.removeAttribute("disabled")
         botaoLogin.style.backgroundColor = "#7898FF";
-        botaoLogin.innerText = "Acessar";
         return true;
 
     } else {
         //False
         botaoLogin.setAttribute("disabled", "true")
         botaoLogin.style.backgroundColor = "#979292A1";
-        botaoLogin.innerText = "Bloqueado";
         return false;
     }
 }
