@@ -122,7 +122,7 @@ emailLogin.addEventListener("blur", () => {
 });
 
 /* Verificando o input de senha */
-passwordLogin.addEventListener("keyup", () => {
+passwordLogin.addEventListener("blur", () => {
 
     let validacaoSenha = document.getElementById("validacaoSenha");
     
