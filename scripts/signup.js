@@ -1,17 +1,15 @@
-const INPUT_NAME = document.getElementById('inputName')
-const INPUT_SURNAME = document.getElementById('inputSurname')
-const INPUT_EMAIL = document.getElementById('inputEmail')
-const INPUT_PASSWORD = document.getElementById('inputPassword')
-const INPUT_REPEAT_PASSWORD = document.getElementById('inputRepeatPassword')
+const FIRST_NAME = document.getElementById('firstName')
+const LAST_NAME = document.getElementById('lastName')
+const EMAIL = document.getElementById('email')
+const PASSWORD = document.getElementById('password')
+const REPEAT_PASSWORD = document.getElementById('repeatPassword')
 const CREATE_ACC_BUTTON = document.getElementById('createAcc')
 
-const NAME_VALIDATION = document.getElementById('nameValidation')
-const SURNAME_VALIDATION = document.getElementById('surnameValidation')
+const FIRST_NAME_VALIDATION = document.getElementById('firstNameValidation')
+const LAST_NAME_VALIDATION = document.getElementById('lastNameValidation')
 const EMAIL_VALIDATION = document.getElementById('emailValidation')
 const PASSWORD_VALIDATION = document.getElementById('passwordValidation')
-const REPEAT_PASSWORD_VALIDATION = document.getElementById(
-  'repeatPasswordValidation'
-)
+const REPEAT_PASSWORD_VALIDATION = document.getElementById('repeatPasswordValidation')
 
 function createAccValidation(name, surname, email, password, repeatPassword) {
   if (
@@ -20,8 +18,8 @@ function createAccValidation(name, surname, email, password, repeatPassword) {
     email &&
     password &&
     repeatPassword &&
-    NAME_VALIDATION.innerText === '' &&
-    SURNAME_VALIDATION.innerText === '' &&
+    FIRST_NAME_VALIDATION.innerText === '' &&
+    LAST_NAME_VALIDATION.innerText === '' &&
     EMAIL_VALIDATION.innerText === '' &&
     PASSWORD_VALIDATION.innerText === '' &&
     REPEAT_PASSWORD_VALIDATION.innerText === ''
@@ -39,153 +37,153 @@ function createAccValidation(name, surname, email, password, repeatPassword) {
 }
 
 let newUserObj = {
-  name: '',
-  surname: '',
+  firstName: '',
+  lastName: '',
   email: '',
   password: ''
 }
 
-INPUT_NAME.addEventListener('keyup', () => {
-  if (INPUT_NAME.value) {
-    NAME_VALIDATION.innerText = ''
-    INPUT_NAME.classList.remove('form-error')
+FIRST_NAME.addEventListener('keyup', () => {
+  if (FIRST_NAME.value) {
+    FIRST_NAME_VALIDATION.innerText = ''
+    FIRST_NAME.classList.remove('form-error')
   } else {
-    NAME_VALIDATION.innerText = 'Campo obrigatório'
-    INPUT_NAME.classList.add('form-error')
+    FIRST_NAME_VALIDATION.innerText = 'Campo obrigatório'
+    FIRST_NAME.classList.add('form-error')
   }
   createAccValidation(
-    INPUT_NAME.value,
-    INPUT_SURNAME.value,
-    INPUT_EMAIL.value,
-    INPUT_PASSWORD.value,
-    INPUT_REPEAT_PASSWORD.value
+    FIRST_NAME.value,
+    LAST_NAME.value,
+    EMAIL.value,
+    PASSWORD.value,
+    REPEAT_PASSWORD.value
   )
 })
 
-INPUT_SURNAME.addEventListener('keyup', () => {
-  if (INPUT_SURNAME.value) {
-    SURNAME_VALIDATION.innerText = ''
-    INPUT_SURNAME.classList.remove('form-error')
+LAST_NAME.addEventListener('keyup', () => {
+  if (LAST_NAME.value) {
+    LAST_NAME_VALIDATION.innerText = ''
+    LAST_NAME.classList.remove('form-error')
   } else {
-    SURNAME_VALIDATION.innerText = 'Campo obrigatório'
-    INPUT_SURNAME.classList.add('form-error')
+    LAST_NAME_VALIDATION.innerText = 'Campo obrigatório'
+    LAST_NAME.classList.add('form-error')
   }
   createAccValidation(
-    INPUT_NAME.value,
-    INPUT_SURNAME.value,
-    INPUT_EMAIL.value,
-    INPUT_PASSWORD.value,
-    INPUT_REPEAT_PASSWORD.value
+    FIRST_NAME.value,
+    LAST_NAME.value,
+    EMAIL.value,
+    PASSWORD.value,
+    REPEAT_PASSWORD.value
   )
 })
 
-INPUT_EMAIL.addEventListener('keyup', () => {
-  if (INPUT_EMAIL.value) {
+EMAIL.addEventListener('keyup', () => {
+  if (EMAIL.value) {
     EMAIL_VALIDATION.innerText = ''
-    INPUT_EMAIL.classList.remove('form-error')
+    EMAIL.classList.remove('form-error')
   } else {
     EMAIL_VALIDATION.innerText = 'Campo obrigatório'
-    INPUT_EMAIL.classList.add('form-error')
+    EMAIL.classList.add('form-error')
   }
   createAccValidation(
-    INPUT_NAME.value,
-    INPUT_SURNAME.value,
-    INPUT_EMAIL.value,
-    INPUT_PASSWORD.value,
-    INPUT_REPEAT_PASSWORD.value
+    FIRST_NAME.value,
+    LAST_NAME.value,
+    EMAIL.value,
+    PASSWORD.value,
+    REPEAT_PASSWORD.value
   )
 })
 
-INPUT_EMAIL.addEventListener('blur', () => {
-  if (INPUT_EMAIL.value.match(VALID_EMAIL_REQ)) {
+EMAIL.addEventListener('blur', () => {
+  if (EMAIL.value.match(VALID_EMAIL_REQ)) {
     EMAIL_VALIDATION.innerText = ''
-    INPUT_EMAIL.classList.remove('form-error')
-  } else if (INPUT_EMAIL.value === '') {
+    EMAIL.classList.remove('form-error')
+  } else if (EMAIL.value === '') {
     EMAIL_VALIDATION.innerText = 'Campo obrigatório'
-    INPUT_EMAIL.classList.add('form-error')
+    EMAIL.classList.add('form-error')
   } else {
     EMAIL_VALIDATION.innerText = 'Email inválido'
-    INPUT_EMAIL.classList.add('form-error')
+    EMAIL.classList.add('form-error')
   }
 })
 
-INPUT_PASSWORD.addEventListener('keyup', () => {
-  if (INPUT_PASSWORD.value) {
+PASSWORD.addEventListener('keyup', () => {
+  if (PASSWORD.value) {
     PASSWORD_VALIDATION.innerText = ''
-    INPUT_PASSWORD.classList.remove('form-error')
+    PASSWORD.classList.remove('form-error')
   } else {
     PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
-    INPUT_PASSWORD.classList.add('form-error')
+    PASSWORD.classList.add('form-error')
   }
   createAccValidation(
-    INPUT_NAME.value,
-    INPUT_SURNAME.value,
-    INPUT_EMAIL.value,
-    INPUT_PASSWORD.value,
-    INPUT_REPEAT_PASSWORD.value
+    FIRST_NAME.value,
+    LAST_NAME.value,
+    EMAIL.value,
+    PASSWORD.value,
+    REPEAT_PASSWORD.value
   )
 })
 
-INPUT_REPEAT_PASSWORD.addEventListener('keyup', () => {
-  if (INPUT_REPEAT_PASSWORD.value) {
+REPEAT_PASSWORD.addEventListener('keyup', () => {
+  if (REPEAT_PASSWORD.value) {
     REPEAT_PASSWORD_VALIDATION.innerText = ''
-    INPUT_REPEAT_PASSWORD.classList.remove('form-error')
+    REPEAT_PASSWORD.classList.remove('form-error')
   } else {
     REPEAT_PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
-    INPUT_REPEAT_PASSWORD.classList.add('form-error')
+    REPEAT_PASSWORD.classList.add('form-error')
   }
   createAccValidation(
-    INPUT_NAME.value,
-    INPUT_SURNAME.value,
-    INPUT_EMAIL.value,
-    INPUT_PASSWORD.value,
-    INPUT_REPEAT_PASSWORD.value
+    FIRST_NAME.value,
+    LAST_NAME.value,
+    EMAIL.value,
+    PASSWORD.value,
+    REPEAT_PASSWORD.value
   )
 })
 
-INPUT_REPEAT_PASSWORD.addEventListener('blur', () => {
-  if (INPUT_REPEAT_PASSWORD.value === INPUT_PASSWORD.value) {
+REPEAT_PASSWORD.addEventListener('blur', () => {
+  if (REPEAT_PASSWORD.value === PASSWORD.value) {
     REPEAT_PASSWORD_VALIDATION.innerText = ''
-    INPUT_REPEAT_PASSWORD.classList.remove('form-error')
-  } else if (INPUT_REPEAT_PASSWORD.value === '') {
+    REPEAT_PASSWORD.classList.remove('form-error')
+  } else if (REPEAT_PASSWORD.value === '') {
     REPEAT_PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
-    INPUT_REPEAT_PASSWORD.classList.add('form-error')
+    REPEAT_PASSWORD.classList.add('form-error')
   } else {
     REPEAT_PASSWORD_VALIDATION.innerText = 'As senhas devem ser iguais'
-    INPUT_REPEAT_PASSWORD.classList.add('form-error')
+    REPEAT_PASSWORD.classList.add('form-error')
   }
   createAccValidation(
-    INPUT_NAME.value,
-    INPUT_SURNAME.value,
-    INPUT_EMAIL.value,
-    INPUT_PASSWORD.value,
-    INPUT_REPEAT_PASSWORD.value
+    FIRST_NAME.value,
+    LAST_NAME.value,
+    EMAIL.value,
+    PASSWORD.value,
+    REPEAT_PASSWORD.value
   )
 })
 
 CREATE_ACC_BUTTON.addEventListener('click', function (event) {
   if (
     createAccValidation(
-      INPUT_NAME.value,
-      INPUT_SURNAME.value,
-      INPUT_EMAIL.value,
-      INPUT_PASSWORD.value,
-      INPUT_REPEAT_PASSWORD.value
+      FIRST_NAME.value,
+      LAST_NAME.value,
+      EMAIL.value,
+      PASSWORD.value,
+      REPEAT_PASSWORD.value
     )
   ) {
     event.preventDefault()
 
-    let name = normalizeTextRemoveSpaces(INPUT_NAME.value)
-    let surName = normalizeTextRemoveSpaces(INPUT_SURNAME.value)
-    let email = normalizeTextRemoveSpaces(INPUT_EMAIL.value)
-    let password = normalizeTextRemoveSpaces(INPUT_PASSWORD.value)
+    let firstName = normalizeTextRemoveSpaces(FIRST_NAME.value)
+    let lastName = normalizeTextRemoveSpaces(LAST_NAME.value)
+    let email = normalizeTextRemoveSpaces(EMAIL.value)
+    let password = normalizeTextRemoveSpaces(PASSWORD.value)
 
-    name = normalizeTextToUpperCase(name)
-    surName = normalizeTextToUpperCase(surName)
+    firstName = normalizeTextToUpperCase(firstName)
+    lastName = normalizeTextToUpperCase(lastName)
     email = normalizeTextToUpperCase(email)
 
-    newUserObj.name = name
-    newUserObj.surname = surName
+    newUserObj.firstName = firstName
+    newUserObj.lastName = lastName
     newUserObj.email = email
     newUserObj.password = password
 

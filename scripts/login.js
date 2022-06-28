@@ -1,15 +1,15 @@
-const INPUT_EMAIL = document.getElementById('inputEmail')
-const INPUT_PASSWORD = document.getElementById('inputPassword')
+const EMAIL_LOGIN = document.getElementById('emailLogin')
+const PASSWORD_LOGIN = document.getElementById('passwordLogin')
 const ACCESS_BUTTON = document.getElementById('accessButton')
-const EMAIL_VALIDATION = document.getElementById('emailValidation')
-const PASSWORD_VALIDATION = document.getElementById('passwordValidation')
+const EMAIL_LOGIN_VALIDATION = document.getElementById('emailLoginValidation')
+const PASSWORD_LOGIN_VALIDATION = document.getElementById('passwordLoginValidation')
 
 function loginValidation(email, password) {
   if (
     email &&
     password &&
-    EMAIL_VALIDATION.innerText === '' &&
-    PASSWORD_VALIDATION.innerText === ''
+    EMAIL_LOGIN_VALIDATION.innerText === '' &&
+    PASSWORD_LOGIN_VALIDATION.innerText === ''
   ) {
     //True
     ACCESS_BUTTON.removeAttribute('disabled')
@@ -28,47 +28,47 @@ let userObj = {
   password: ''
 }
 
-INPUT_EMAIL.addEventListener('keyup', () => {
-  if (INPUT_EMAIL.value) {
-    EMAIL_VALIDATION.innerText = ''
-    INPUT_EMAIL.classList.remove('form-error')
+EMAIL_LOGIN.addEventListener('keyup', () => {
+  if (EMAIL_LOGIN.value) {
+    EMAIL_LOGIN_VALIDATION.innerText = ''
+    EMAIL_LOGIN.classList.remove('form-error')
   } else {
-    EMAIL_VALIDATION.innerText = 'Campo obrigatório'
-    INPUT_EMAIL.classList.add('form-error')
+    EMAIL_LOGIN_VALIDATION.innerText = 'Campo obrigatório'
+    EMAIL_LOGIN.classList.add('form-error')
   }
-  loginValidation(INPUT_EMAIL.value, INPUT_PASSWORD.value)
+  loginValidation(EMAIL_LOGIN.value, PASSWORD_LOGIN.value)
 })
 
-INPUT_EMAIL.addEventListener('blur', () => {
-  if (INPUT_EMAIL.value.match(VALID_EMAIL_REQ)) {
-    EMAIL_VALIDATION.innerText = ''
-    INPUT_EMAIL.classList.remove('form-error')
-  } else if (INPUT_EMAIL.value === '') {
-    EMAIL_VALIDATION.innerText = 'Campo obrigatório'
-    INPUT_EMAIL.classList.add('form-error')
+EMAIL_LOGIN.addEventListener('blur', () => {
+  if (EMAIL_LOGIN.value.match(VALID_EMAIL_REQ)) {
+    EMAIL_LOGIN_VALIDATION.innerText = ''
+    EMAIL_LOGIN.classList.remove('form-error')
+  } else if (EMAIL_LOGIN.value === '') {
+    EMAIL_LOGIN_VALIDATION.innerText = 'Campo obrigatório'
+    EMAIL_LOGIN.classList.add('form-error')
   } else {
-    EMAIL_VALIDATION.innerText = 'Email inválido'
-    INPUT_EMAIL.classList.add('form-error')
+    EMAIL_LOGIN_VALIDATION.innerText = 'Email inválido'
+    EMAIL_LOGIN.classList.add('form-error')
   }
 })
 
-INPUT_PASSWORD.addEventListener('keyup', () => {
-  if (INPUT_PASSWORD.value) {
-    PASSWORD_VALIDATION.innerText = ''
-    INPUT_PASSWORD.classList.remove('form-error')
+PASSWORD_LOGIN.addEventListener('keyup', () => {
+  if (PASSWORD_LOGIN.value) {
+    PASSWORD_LOGIN_VALIDATION.innerText = ''
+    PASSWORD_LOGIN.classList.remove('form-error')
   } else {
-    PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
-    INPUT_PASSWORD.classList.add('form-error')
+    PASSWORD_LOGIN_VALIDATION.innerText = 'Campo obrigatório'
+    PASSWORD_LOGIN.classList.add('form-error')
   }
-  loginValidation(INPUT_EMAIL.value, INPUT_PASSWORD.value)
+  loginValidation(EMAIL_LOGIN.value, PASSWORD_LOGIN.value)
 })
 
 ACCESS_BUTTON.addEventListener('click', function (event) {
-  if (loginValidation(INPUT_EMAIL.value, INPUT_PASSWORD.value)) {
+  if (loginValidation(EMAIL_LOGIN.value, PASSWORD_LOGIN.value)) {
     event.preventDefault()
 
-    let emailLogin = normalizeTextRemoveSpaces(INPUT_EMAIL.value)
-    let passwordLogin = normalizeTextRemoveSpaces(INPUT_PASSWORD.value)
+    let emailLogin = normalizeTextRemoveSpaces(EMAIL_LOGIN.value)
+    let passwordLogin = normalizeTextRemoveSpaces(PASSWORD_LOGIN.value)
 
     userObj.email = emailLogin
     userObj.password = passwordLogin
