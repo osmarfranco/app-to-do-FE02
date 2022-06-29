@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -75,3 +76,81 @@
 
   </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do App</title>
+
+  <!-- ---------------- estilos compartilhados entre login e signup ---------------- -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles/acesso.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous" defer></script>
+  <script src="scripts/validacoes/utils.js" defer></script>
+  <script src="scripts/login/index.js" defer></script>
+
+</head>
+
+<body>
+  <div class="left">
+    <img src="./assets/pessoa-login.png" alt="">
+  </div>
+
+  <div class="right">
+    <form>
+      <div class="form-header">
+        <p>To-Do App</p>
+      </div>
+      <h1>Acessar</h1>
+      <label>
+        Email:
+        <input id="inputEmail" type="email" required>
+        <small id="validacaoEmail"></small>
+      </label>
+      <label>
+        Senha:
+        <input id="inputPassword" type="password" required>
+        <small id="validacaoSenha"></small>
+      </label>
+
+      <button id="botaoLogin" type="submit" disabled>Acessar</button>
+
+    </form>
+    <div class="ingressar">
+      <a href="signup.html">Não possui conta? Crie agora mesmo</a>
+    </div>
+  </div>
+
+  <!-- Pop up para sucesso ou fracasso do login -->
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toastSucesso" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex text-bg-primary border-0">
+        <div class="toast-body ">
+          Login realizado com sucesso!
+        </div>
+          <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>  
+  </div>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="toastFracasso" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex text-bg-danger border-0">
+        <div class="toast-body ">
+          Email e/ou senha inválidos!
+        </div>
+          <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>  
+  </div>
+
+</body>
+
+</html>
+>>>>>>> aae3f1c17410675ac0e770d012f97ba584a6dd88
