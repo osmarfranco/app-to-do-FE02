@@ -1,3 +1,4 @@
+/* ---------- VARIABLES ---------- */
 const FIRST_NAME = document.getElementById('firstName')
 const LAST_NAME = document.getElementById('lastName')
 const EMAIL = document.getElementById('email')
@@ -11,10 +12,21 @@ const EMAIL_VALIDATION = document.getElementById('emailValidation')
 const PASSWORD_VALIDATION = document.getElementById('passwordValidation')
 const REPEAT_PASSWORD_VALIDATION = document.getElementById('repeatPasswordValidation')
 
-function createAccValidation(name, surname, email, password, repeatPassword) {
+const TOAST_SUCCESS = document.getElementById('toastSuccess')
+const TOAST_FAIL = document.getElementById('toastFail')
+
+let newUserObj = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: ''
+}
+
+/* ---------- FUNCTIONS ---------- */
+function createAccValidation(firstname, lastname, email, password, repeatPassword) {
   if (
-    name &&
-    surname &&
+    firstname &&
+    lastname &&
     email &&
     password &&
     repeatPassword &&
@@ -36,14 +48,26 @@ function createAccValidation(name, surname, email, password, repeatPassword) {
   }
 }
 
-let newUserObj = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  password: ''
+function signUpSuccess(successResult) {
+  setTimeout(() => {
+      location.href = "index.html"
+  }, 1000);
+  
+  console.log(successResult);
+  const toast = new bootstrap.Toast(TOAST_SUCCESS)
+
+  toast.show()
 }
 
-FIRST_NAME.addEventListener('keyup', () => {
+function signUpError(errorResult) {
+  console.log(errorResult);
+  const toast = new bootstrap.Toast(TOAST_FAIL)
+
+  toast.show() 
+}
+
+/* ---------- EVENT LISTENERS ---------- */
+FIRST_NAME.addEventListener('input', () => {
   if (FIRST_NAME.value) {
     FIRST_NAME_VALIDATION.innerText = ''
     FIRST_NAME.classList.remove('form-error')
@@ -60,7 +84,24 @@ FIRST_NAME.addEventListener('keyup', () => {
   )
 })
 
-LAST_NAME.addEventListener('keyup', () => {
+FIRST_NAME.addEventListener('blur', () => {
+  if (FIRST_NAME.value) {
+    FIRST_NAME_VALIDATION.innerText = ''
+    FIRST_NAME.classList.remove('form-error')
+  } else {
+    FIRST_NAME_VALIDATION.innerText = 'Campo obrigatório'
+    FIRST_NAME.classList.add('form-error')
+  }
+  createAccValidation(
+    FIRST_NAME.value,
+    LAST_NAME.value,
+    EMAIL.value,
+    PASSWORD.value,
+    REPEAT_PASSWORD.value
+  )
+})
+
+LAST_NAME.addEventListener('input', () => {
   if (LAST_NAME.value) {
     LAST_NAME_VALIDATION.innerText = ''
     LAST_NAME.classList.remove('form-error')
@@ -77,7 +118,37 @@ LAST_NAME.addEventListener('keyup', () => {
   )
 })
 
-EMAIL.addEventListener('keyup', () => {
+LAST_NAME.addEventListener('blur', () => {
+  if (LAST_NAME.value) {
+    LAST_NAME_VALIDATION.innerText = ''
+    LAST_NAME.classList.remove('form-error')
+  } else {
+    LAST_NAME_VALIDATION.innerText = 'Campo obrigatório'
+    LAST_NAME.classList.add('form-error')
+  }
+  createAccValidation(
+    FIRST_NAME.value,
+    LAST_NAME.value,
+    EMAIL.value,
+    PASSWORD.value,
+    REPEAT_PASSWORD.value
+  )
+})
+
+EMAIL.addEventListener('input', () => {
+  if (EMAIL.value.match(VALID_EMAIL_REQ)) {
+    EMAIL_VALIDATION.innerText = ''
+    EMAIL.classList.remove('form-error')
+  } else if (EMAIL.value === '') {
+    EMAIL_VALIDATION.innerText = 'Campo obrigatório'
+    EMAIL.classList.add('form-error')
+  } else {
+    EMAIL_VALIDATION.innerText = 'Email inválido'
+    EMAIL.classList.add('form-error')
+  }
+})
+
+EMAIL.addEventListener('blur', () => {
   if (EMAIL.value) {
     EMAIL_VALIDATION.innerText = ''
     EMAIL.classList.remove('form-error')
@@ -94,20 +165,7 @@ EMAIL.addEventListener('keyup', () => {
   )
 })
 
-EMAIL.addEventListener('blur', () => {
-  if (EMAIL.value.match(VALID_EMAIL_REQ)) {
-    EMAIL_VALIDATION.innerText = ''
-    EMAIL.classList.remove('form-error')
-  } else if (EMAIL.value === '') {
-    EMAIL_VALIDATION.innerText = 'Campo obrigatório'
-    EMAIL.classList.add('form-error')
-  } else {
-    EMAIL_VALIDATION.innerText = 'Email inválido'
-    EMAIL.classList.add('form-error')
-  }
-})
-
-PASSWORD.addEventListener('keyup', () => {
+PASSWORD.addEventListener('input', () => {
   if (PASSWORD.value) {
     PASSWORD_VALIDATION.innerText = ''
     PASSWORD.classList.remove('form-error')
@@ -124,12 +182,32 @@ PASSWORD.addEventListener('keyup', () => {
   )
 })
 
-REPEAT_PASSWORD.addEventListener('keyup', () => {
-  if (REPEAT_PASSWORD.value) {
+PASSWORD.addEventListener('blur', () => {
+  if (PASSWORD.value) {
+    PASSWORD_VALIDATION.innerText = ''
+    PASSWORD.classList.remove('form-error')
+  } else {
+    PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
+    PASSWORD.classList.add('form-error')
+  }
+  createAccValidation(
+    FIRST_NAME.value,
+    LAST_NAME.value,
+    EMAIL.value,
+    PASSWORD.value,
+    REPEAT_PASSWORD.value
+  )
+})
+
+REPEAT_PASSWORD.addEventListener('input', () => {
+  if (REPEAT_PASSWORD.value === PASSWORD.value) {
     REPEAT_PASSWORD_VALIDATION.innerText = ''
     REPEAT_PASSWORD.classList.remove('form-error')
-  } else {
+  } else if (REPEAT_PASSWORD.value === '') {
     REPEAT_PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
+    REPEAT_PASSWORD.classList.add('form-error')
+  } else {
+    REPEAT_PASSWORD_VALIDATION.innerText = 'As senhas devem ser iguais'
     REPEAT_PASSWORD.classList.add('form-error')
   }
   createAccValidation(
@@ -142,14 +220,11 @@ REPEAT_PASSWORD.addEventListener('keyup', () => {
 })
 
 REPEAT_PASSWORD.addEventListener('blur', () => {
-  if (REPEAT_PASSWORD.value === PASSWORD.value) {
+  if (REPEAT_PASSWORD.value) {
     REPEAT_PASSWORD_VALIDATION.innerText = ''
     REPEAT_PASSWORD.classList.remove('form-error')
-  } else if (REPEAT_PASSWORD.value === '') {
-    REPEAT_PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
-    REPEAT_PASSWORD.classList.add('form-error')
   } else {
-    REPEAT_PASSWORD_VALIDATION.innerText = 'As senhas devem ser iguais'
+    REPEAT_PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
     REPEAT_PASSWORD.classList.add('form-error')
   }
   createAccValidation(
@@ -189,6 +264,37 @@ CREATE_ACC_BUTTON.addEventListener('click', function (event) {
 
     let newUserObjInJson = JSON.stringify(newUserObj)
 
-    console.log(newUserObjInJson)
+    //console.log(newUserObjInJson)
+
+    let configRequest = {
+      method: "POST",
+      headers: {
+        "Content-type": "Application/json"
+      },
+      body: newUserObjInJson
+    }
+
+    fetch(ENDPOINT_USERS, configRequest)
+      .then(
+        result => {
+          if(result.status == 201 || result.status == 200){
+            return result.json()
+          } else {
+            throw result
+          }
+        }
+      ).then(
+        result => {
+          signUpSuccess(result)
+        }
+      ).catch(
+        error => {
+          if(error.status == 400 || error.status == 404){
+            signUpError("Dados inválidos")
+          }
+        }
+      )
+  } else {
+    console.log("Cadastro inválido")
   }
 })
