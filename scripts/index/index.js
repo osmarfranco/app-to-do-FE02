@@ -57,31 +57,30 @@ function loginError(errorResult) {
   
 }
 
-/* async function loginApi() {
+async function loginApi(object) {
     let configRequest = {
         method:"POST",
         headers: {
             "Content-type": "Application/json"
         },
-        body: objetoUsuarioEmJson
-    }
-    try{
-    let resposta = await fetch("https://ctd-todo-api.herokuapp.com/v1/users/login", configRequest);
-    
-    if(resposta.status == 201 || resposta.status == 200) {
-        let respostaFinal = await resposta.json()
-    } else {
-        throw resposta
-    }
+        body: object
+      }
+
+    try {
+      let data = await fetch(ENDPOINT_USERS_LOGIN, configRequest)
+      
+      if(data.status == 201 || data.status == 200) {
+          let json = await data.json()
+          loginSuccess(json)
+      } else {
+        throw data
+      }
     } catch (error) {
-        //Verifica os status de "senha incorreta ou email incorreto"
-        if (error.status == 400 || error.status == 404) {
-            //Ao obter algum desses status, chama a função erro no login
-            loginErro("Email e/ou senha inválidos");
-            
-        }
+      if (error.status == 400 || error.status == 404) {
+        loginError("Email e/ou senha inválidos")  
+      }
     }
-} */
+}
 
 /* ---------- EVENT LISTENERS ---------- */
 EMAIL_LOGIN.addEventListener('keyup', () => {
@@ -132,37 +131,6 @@ ACCESS_BUTTON.addEventListener('click', function (event) {
 
     let userObjInJson = JSON.stringify(userObj)
 
-    //console.log(userObjInJson)
-
-    let configRequest = {
-      method: "POST",
-      headers: {
-        "Content-type": "Application/json"
-      },
-      body: userObjInJson
-    }
-
-    fetch(ENDPOINT_USERS_LOGIN, configRequest)
-      .then(
-        result => {
-          if(result.status == 201 || result.status == 200){
-            return result.json()
-          } else {
-            throw result
-          }
-        }
-      ).then(
-        result => {
-          loginSuccess(result)
-        }
-      ).catch(
-        error => {
-          if(error.status == 400 || error.status == 404){
-            loginError("Email e/ou senha inválidos")
-          }
-        }
-      )
-  } else {
-    console.log("Login inválido")
+    loginApi(userObjInJson)
   }
 })

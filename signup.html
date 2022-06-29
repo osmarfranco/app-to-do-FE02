@@ -34,27 +34,27 @@
 
       <label>
         Nome:
-        <input type="text" id="firstName">
+        <input type="text" id="firstName" required>
       </label>
       <small id="firstNameValidation"></small>
       <label>
         Sobrenome:
-        <input type="text" id="lastName">
+        <input type="text" id="lastName" required>
       </label>
       <small id="lastNameValidation"></small>
       <label>
         Email:
-        <input type="email" id="email">
+        <input type="email" id="email" required>
       </label>
       <small id="emailValidation"></small>
       <label>
         Senha:
-        <input type="password" id="password">
+        <input type="password" id="password" required>
       </label>
       <small id="passwordValidation"></small>
       <label>
         Repetir senha:
-        <input type="password" id="repeatPassword">
+        <input type="password" id="repeatPassword" required>
       </label>
       <small id="repeatPasswordValidation"></small>
 
@@ -82,7 +82,7 @@
     <div id="toastFail" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex text-bg-danger border-0">
         <div class="toast-body">
-          Dados inválidos!
+          Este usuário já existe, tente outro!
         </div>
           <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
