@@ -33,14 +33,6 @@ form:after {
   background: linear-gradient(var(--primary), var(--secondary));
 }
 
-/* Novo style criado */
-small {
-  display: flex;
-  font-size: 12px;
-  font-weight: bold;
-  color: #E9554EBB;
-}
-
 
 input {
   width: 100%;
@@ -53,6 +45,11 @@ input {
 input:focus {
   outline: none;
   border: 1px solid lightgrey;
+}
+
+small {
+  width: 100%;
+  color: red;
 }
 
 label {
@@ -96,4 +93,13 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.form-error, .form-error:focus{
+  outline: none;
+  border: 1px solid red;
+}
+
+.blocked-button{
+  background-color: var(--disabled);
 }
