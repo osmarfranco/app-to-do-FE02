@@ -9,7 +9,6 @@ const PASSWORD_LOGIN_VALIDATION = document.getElementById('passwordLoginValidati
 const TOAST_SUCCESS = document.getElementById('toastSuccess')
 const TOAST_FAIL = document.getElementById('toastFail')
 
-let token
 let userObj = {
   email: '',
   password: ''
@@ -37,7 +36,6 @@ function loginValidation(email, password) {
 
 function loginSuccess(successResult) {
   sessionStorage.setItem("jwt", successResult.jwt)
-  token = sessionStorage.getItem("jwt")
   setTimeout(() => {
       location.href = "tarefas.html"
   }, 1000);
@@ -123,13 +121,14 @@ ACCESS_BUTTON.addEventListener('click', function (event) {
     event.preventDefault()
 
     let emailLogin = normalizeTextRemoveSpaces(EMAIL_LOGIN.value)
-    emailLogin = normalizeTextToUpperCase(emailLogin)
+    emailLogin = normalizeTextToLowerCase(emailLogin)
     let passwordLogin = normalizeTextRemoveSpaces(PASSWORD_LOGIN.value)
 
     userObj.email = emailLogin
     userObj.password = passwordLogin
 
     let userObjInJson = JSON.stringify(userObj)
+    console.log(userObjInJson)
 
     loginApi(userObjInJson)
   }

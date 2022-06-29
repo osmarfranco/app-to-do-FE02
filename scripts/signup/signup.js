@@ -296,9 +296,9 @@ CREATE_ACC_BUTTON.addEventListener('click', function (event) {
     let email = normalizeTextRemoveSpaces(EMAIL.value)
     let password = normalizeTextRemoveSpaces(PASSWORD.value)
 
-    firstName = normalizeTextToUpperCase(firstName)
-    lastName = normalizeTextToUpperCase(lastName)
-    email = normalizeTextToUpperCase(email)
+    firstName = normalizeTextToLowerCase(firstName)
+    lastName = normalizeTextToLowerCase(lastName)
+    email = normalizeTextToLowerCase(email)
 
     newUserObj.firstName = firstName
     newUserObj.lastName = lastName
