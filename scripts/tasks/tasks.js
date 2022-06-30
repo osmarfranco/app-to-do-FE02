@@ -83,19 +83,26 @@ function nameInNavBar(objUser) {
 
 function getTasks(tasks){
 
-    const SKELETON = document.getElementById('skeleton')
-    console.log(tasks)
+    const TASK_DESCRIPTION = document.getElementById('teste')
+    let teste = tasks[0].createdAt
+    console.log()
+    
 
     for ( i of tasks){
+
+        let date = new Date(i.createdAt)
         
-        let itemlist = `<li class="tarefa">
+        let dateConvert = date.toLocaleDateString()
+        
+        let itemlist = `
+        <li class="tarefa">
         <div class="not-done"></div>
         <div class="descricao">
           <p class="nome">${i.description}</p>
-          <p class="timestamp">${i.createdAt}1</p>
+          <p class="timestamp">${dateConvert}</p>
         </div>
       </li>`
-      SKELETON.innerHTML += itemlist
+      TASK_DESCRIPTION.innerHTML += itemlist
         
 
     }
