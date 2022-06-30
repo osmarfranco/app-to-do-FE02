@@ -36,7 +36,7 @@
 
     <div class="user-info">
       <p id="nomeUsuario"></p>
-      <div class="user-image"></div>
+      <div id="user-image" class="user-image"></div>
       <p id="closeApp">Finalizar sessão</i>
       </p>
     </div>
@@ -44,9 +44,9 @@
 
 
   <form class="nova-tarefa">
-    <div class="not-done "></div>
+    <div class="not-done"></div>
     <input id="novaTarefa" type="text" placeholder="Nova tarefa">
-    <button type="submit">
+    <button id="botaoNovaTarefa" class="button-blocked" type="submit" disabled>
       <img src="./assets/plus.png" alt="Adicionar uma nova tarefa">
     </button>
   </form>

@@ -80,7 +80,17 @@ a {
   text-indent: .2em;
 }
 
-.nova-tarefa button {
+.button-blocked {
+  height: 2em;
+  width: 2em;
+  background-color: transparent;
+  margin-left: 2em;
+  margin-right: 1em;
+  opacity: .1;
+  cursor: pointer;
+}
+
+.button-default {
   height: 2em;
   width: 2em;
   background-color: transparent;
@@ -90,7 +100,7 @@ a {
   cursor: pointer;
 }
 
-.nova-tarefa button:hover {
+.button-default:hover {
   opacity: 1;
 }
 
