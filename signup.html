@@ -13,6 +13,7 @@
 
   <!-- ---------------- estilos compartilhados entre login e signup ---------------- -->
   <link rel="stylesheet" href="./styles/acesso.css">
+  <script src="https://kit.fontawesome.com/5fbe75db98.js" crossorigin="anonymous"></script>
 
   <!-- ---------------------- lógica aplicada no registro -------------------- -->
   <script src="./scripts/utils/api-elements.js" defer></script>
@@ -48,7 +49,14 @@
       </label>
       <small id="emailValidation"></small>
       <label>
-        Senha:
+        Senha: <i class="fa-solid fa-circle-question" data-bs-html="true" data-bs-toggle="tooltip" data-bs-placement="top"
+        data-bs-custom-class="custom-tooltip"
+        title="
+        Deve conter: <br>
+        Mínimo 8 caracteres <br>
+        1 Maiúscula<br>
+        1 Número<br>
+        1 Símbolo"></i>
         <input type="password" id="password" required>
       </label>
       <small id="passwordValidation"></small>

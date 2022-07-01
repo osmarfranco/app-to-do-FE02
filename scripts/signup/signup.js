@@ -14,6 +14,8 @@ const REPEAT_PASSWORD_VALIDATION = document.getElementById('repeatPasswordValida
 
 const TOAST_SUCCESS = document.getElementById('toastSuccess')
 const TOAST_FAIL = document.getElementById('toastFail')
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
 let newUserObj = {
   firstName: '',

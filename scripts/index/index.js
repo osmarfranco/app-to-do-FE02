@@ -36,14 +36,15 @@ function loginValidation(email, password) {
 
 function loginSuccess(successResult) {
   sessionStorage.setItem("jwt", successResult.jwt)
-  setTimeout(() => {
-      location.href = "tarefas.html"
-  }, 1000);
   
-  console.log(token);
+  
   const toast = new bootstrap.Toast(TOAST_SUCCESS)
 
   toast.show()
+
+  setTimeout(() => {
+    location.href = "tarefas.html"
+}, 1000);
   
 }
 

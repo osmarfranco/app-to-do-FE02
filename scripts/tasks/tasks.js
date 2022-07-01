@@ -62,8 +62,6 @@ function nameInNavBar(objUser) {
 // }
 
 function getTasks(tasks){
-    let teste = tasks[0].createdAt
-    console.log()
     
     for ( i of tasks){
         let date = new Date(i.createdAt)
@@ -74,7 +72,7 @@ function getTasks(tasks){
         <div class="not-done"></div>
         <div class="descricao">
         <p class="nome">${i.description}</p>
-        <p class="timestamp">${dateConvert}</p>
+        <p class="timestamp">Criado em: ${dateConvert}</p>
         </div>
         </li>`
 
