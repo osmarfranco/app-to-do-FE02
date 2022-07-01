@@ -196,17 +196,25 @@ EMAIL.addEventListener('blur', () => {
 })
 
 PASSWORD.addEventListener('input', () => {
-  if (PASSWORD.value === REPEAT_PASSWORD.value || (PASSWORD.value && REPEAT_PASSWORD.value === '')) {
+  if (PASSWORD.value === '') {
+    PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
+    PASSWORD.classList.add('form-error')
+  } else if (!PASSWORD.value.match(VALID_PASSWORD_REQ)){
+    PASSWORD_VALIDATION.innerText = 
+      `As senhas devem conter pelo menos: 
+        - 8 caracteres
+        - 1 Letra Maiúscula
+        - 1 Número
+        - 1 Símbolo`
+      PASSWORD.classList.add('form-error')
+  } else if (PASSWORD.value === REPEAT_PASSWORD.value || (PASSWORD.value && REPEAT_PASSWORD.value === '')) {
     PASSWORD_VALIDATION.innerText = ''
     PASSWORD.classList.remove('form-error')
     REPEAT_PASSWORD_VALIDATION.innerText = ''
     REPEAT_PASSWORD.classList.remove('form-error')
-  } else if (PASSWORD.value === '') {
-    PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
-    PASSWORD.classList.add('form-error')
   } else {
     REPEAT_PASSWORD_VALIDATION.innerText = 'As senhas devem ser iguais'
-    REPEAT_PASSWORD.classList.add('form-error')
+    REPEAT_PASSWORD.classList.add('form-error') 
   }
   createAccValidation(
     FIRST_NAME.value,
@@ -217,36 +225,26 @@ PASSWORD.addEventListener('input', () => {
   )
 })
 
-PASSWORD.addEventListener('blur', () => {
-// revisar aqui
-//renato
-  //regex para verificar a senha
-  //let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
-  //função que valida a senha
-  //if (regex.test(PASSWORD.value)){
-    //console.log('foi')
-    
-  if (PASSWORD.value === REPEAT_PASSWORD.value || (PASSWORD.value && REPEAT_PASSWORD.value === '')) {
+PASSWORD.addEventListener('blur', () => {  
+  if (PASSWORD.value === '') {
+    PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
+    PASSWORD.classList.add('form-error')
+  } else if (!PASSWORD.value.match(VALID_PASSWORD_REQ)){
+    PASSWORD_VALIDATION.innerText = 
+      `As senhas devem conter pelo menos: 
+        - 8 caracteres
+        - 1 Letra Maiúscula
+        - 1 Número
+        - 1 Símbolo`
+      PASSWORD.classList.add('form-error')
+  } else if (PASSWORD.value === REPEAT_PASSWORD.value || (PASSWORD.value && REPEAT_PASSWORD.value === '')) {
     PASSWORD_VALIDATION.innerText = ''
     PASSWORD.classList.remove('form-error')
     REPEAT_PASSWORD_VALIDATION.innerText = ''
     REPEAT_PASSWORD.classList.remove('form-error')
-  } else if (PASSWORD.value === '') {
-    PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
-    PASSWORD.classList.add('form-error')
   } else {
     REPEAT_PASSWORD_VALIDATION.innerText = 'As senhas devem ser iguais'
-    REPEAT_PASSWORD.classList.add('form-error')
-    
-    // revisar aqui
-// renato
-  //}}
-  //erro caso a senha não ao pedido
-  //else
-  //{
-    //PASSWORD_VALIDATION.innerText = 'As senhas devem conter 8 caracteres no mínimo, 1 Letra Maiúscula no mínimo, 1 Número no mínimo, 1 Símbolo no mínimo'
-    //PASSWORD.classList.add('form-error')
-
+    REPEAT_PASSWORD.classList.add('form-error') 
   }
   createAccValidation(
     FIRST_NAME.value,
@@ -258,16 +256,16 @@ PASSWORD.addEventListener('blur', () => {
 })
 
 REPEAT_PASSWORD.addEventListener('input', () => {
-  if (REPEAT_PASSWORD.value === PASSWORD.value) {
-    REPEAT_PASSWORD_VALIDATION.innerText = ''
-    REPEAT_PASSWORD.classList.remove('form-error')
-  } else if (REPEAT_PASSWORD.value === '') {
+  if (REPEAT_PASSWORD.value === '') {
     REPEAT_PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
     REPEAT_PASSWORD.classList.add('form-error')
+  } else if (REPEAT_PASSWORD.value === PASSWORD.value) {
+    REPEAT_PASSWORD_VALIDATION.innerText = ''
+    REPEAT_PASSWORD.classList.remove('form-error')
   } else {
     REPEAT_PASSWORD_VALIDATION.innerText = 'As senhas devem ser iguais'
     REPEAT_PASSWORD.classList.add('form-error')
-  }
+  } 
   createAccValidation(
     FIRST_NAME.value,
     LAST_NAME.value,
@@ -278,16 +276,16 @@ REPEAT_PASSWORD.addEventListener('input', () => {
 })
 
 REPEAT_PASSWORD.addEventListener('blur', () => {
-  if (REPEAT_PASSWORD.value === PASSWORD.value) {
-    REPEAT_PASSWORD_VALIDATION.innerText = ''
-    REPEAT_PASSWORD.classList.remove('form-error')
-  } else if (REPEAT_PASSWORD.value === '') {
+  if (REPEAT_PASSWORD.value === '') {
     REPEAT_PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
     REPEAT_PASSWORD.classList.add('form-error')
+  } else if (REPEAT_PASSWORD.value === PASSWORD.value) {
+    REPEAT_PASSWORD_VALIDATION.innerText = ''
+    REPEAT_PASSWORD.classList.remove('form-error')
   } else {
     REPEAT_PASSWORD_VALIDATION.innerText = 'As senhas devem ser iguais'
     REPEAT_PASSWORD.classList.add('form-error')
-  }
+  } 
   createAccValidation(
     FIRST_NAME.value,
     LAST_NAME.value,
