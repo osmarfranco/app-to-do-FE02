@@ -218,11 +218,14 @@ PASSWORD.addEventListener('input', () => {
 })
 
 PASSWORD.addEventListener('blur', () => {
+// revisar aqui
+//renato
   //regex para verificar a senha
-  let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
+  //let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
   //função que valida a senha
-  if (regex.test(PASSWORD.value)){
-    console.log('foi')
+  //if (regex.test(PASSWORD.value)){
+    //console.log('foi')
+    
   if (PASSWORD.value === REPEAT_PASSWORD.value || (PASSWORD.value && REPEAT_PASSWORD.value === '')) {
     PASSWORD_VALIDATION.innerText = ''
     PASSWORD.classList.remove('form-error')
@@ -234,12 +237,16 @@ PASSWORD.addEventListener('blur', () => {
   } else {
     REPEAT_PASSWORD_VALIDATION.innerText = 'As senhas devem ser iguais'
     REPEAT_PASSWORD.classList.add('form-error')
-  }}
+    
+    // revisar aqui
+// renato
+  //}}
   //erro caso a senha não ao pedido
-  else
-  {
-    PASSWORD_VALIDATION.innerText = 'As senhas devem conter 8 caracteres no mínimo, 1 Letra Maiúscula no mínimo, 1 Número no mínimo, 1 Símbolo no mínimo'
-    PASSWORD.classList.add('form-error')
+  //else
+  //{
+    //PASSWORD_VALIDATION.innerText = 'As senhas devem conter 8 caracteres no mínimo, 1 Letra Maiúscula no mínimo, 1 Número no mínimo, 1 Símbolo no mínimo'
+    //PASSWORD.classList.add('form-error')
+
   }
   createAccValidation(
     FIRST_NAME.value,
