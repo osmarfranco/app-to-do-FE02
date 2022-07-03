@@ -1,7 +1,12 @@
 /* ---------- VARIABLES ---------- */
 const NEW_TASK = document.getElementById('novaTarefa')
 const NEW_TASK_BTN = document.getElementById('botaoNovaTarefa')
-const TASK_DESCRIPTION = document.getElementById('teste')
+//const TASK_DESCRIPTION = document.getElementById('teste')
+const TASK_DESCRIPTION = document.querySelector('.tarefas-pendentes')
+//const TASK_DONE = document.getElementById('terminadas')
+const TASK_DONE = document.querySelector('.tarefas-terminadas')
+
+
 
 /* ---------- FUNCTIONS ---------- */
 async  function getDataUser(token) { 
@@ -62,12 +67,24 @@ function nameInNavBar(objUser) {
 // }
 
 function getTasks(tasks){
-    let teste = tasks[0].createdAt
-    console.log()
-    
+        
     for ( i of tasks){
         let date = new Date(i.createdAt)
         let dateConvert = date.toLocaleDateString()
+        
+        if (i.completed == true){
+            let itemlistdone = `
+            <li class="tarefa">
+            <div class="not-done"></div>
+            <div class="descricao">
+            <p class="nome">${i.description}</p>
+            <p class="timestamp">${dateConvert}</p>
+            </div>
+            </li>`    
+            
+            TASK_DONE.innerHTML += itemlistdone
+
+        } else{
         
         let itemlist = `
         <li class="tarefa">
@@ -79,6 +96,9 @@ function getTasks(tasks){
         </li>`
 
         TASK_DESCRIPTION.innerHTML += itemlist
+
+        }
+        
     }
 }
 
@@ -107,6 +127,8 @@ async function newTaskApi(object, token) {
       }
     }
   }
+
+
 
 /* ---------- EVENT LISTENERS ---------- */
 onload = function () {
@@ -142,4 +164,22 @@ NEW_TASK_BTN.addEventListener('click', (event) => {
     }
     
     newTaskApi(JSON.stringify(newTask), tokenJwt)
+})
+
+// Visualiza evente do clique e carrega os elementos captados pelo clique no "i"
+document.addEventListener('click', (i) =>{
+    // Avalia se o elemento clicado é a div com a classe 'not-done' dentro da ul "tarefas-pendentes" 
+    if (i.path[0].classList == 'not-done' && i.path[2].classList == 'tarefas-pendentes' ){
+        let pai = i.path[2]
+        let filho = i.path[1].outerHTML
+        TASK_DONE.innerHTML += filho
+        pai.removeChild(i.path[1])
+    } 
+    // Avalia se o elemento clicado é a div com a classe 'not-done' dentro da ul "tarefas-terminadas" 
+    else if (i.path[0].classList == 'not-done' && i.path[2].classList == 'tarefas-terminadas'){
+        let pai = i.path[2]
+        let filho = i.path[1].outerHTML
+        TASK_DESCRIPTION.innerHTML += filho
+        pai.removeChild(i.path[1])
+    }
 })
