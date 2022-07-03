@@ -67,14 +67,13 @@ function nameInNavBar(objUser) {
 // }
 
 function getTasks(tasks){
-        
     for ( i of tasks){
         let date = new Date(i.createdAt)
         let dateConvert = date.toLocaleDateString()
         
         if (i.completed == true){
             let itemlistdone = `
-            <li class="tarefa">
+            <li class="tarefa" id="${i.id}">
             <div class="not-done"></div>
             <div class="descricao">
             <p class="nome">${i.description}</p>
@@ -88,7 +87,7 @@ function getTasks(tasks){
         
         let itemlist = `
         <li class="tarefa">
-        <div class="not-done"></div>
+        <div class="not-done" id="${i.id}"></div>
         <div class="descricao">
         <p class="nome">${i.description}</p>
         <p class="timestamp">${dateConvert}</p>
@@ -102,32 +101,34 @@ function getTasks(tasks){
     }
 }
 
-async function newTaskApi(object, token) {
+async  function editTasks(id, token){
     let configRequest = {
-        method:"POST",
+        method: "PUT",
         headers: {
-            "Content-type": "Application/json",
-            "Authorization": token
+            "Authorization": token,
+            "Content-Type": 'application/json'            
         },
-        body: object
-      }
-    try {
-      let data = await fetch(ENDPOINT_TASKS, configRequest)
-      
-      if(data.status == 201 || data.status == 200) {
-          console.log("Tarefa criada com sucesso")
-          console.log(data.json())
-          location.reload()
-      } else {
-        throw data
-      }
-    } catch (error) {
-      if (error.status == 400 || error.status == 401) {
-        console.log("Algo deu errado e a tarefa não foi criada")  
-      }
+        
+        body:{
+            "completed": true
+        }
     }
-  }
+    try {
+        let data = await fetch(ENDPOINT_TASKS + '/' + id, configRequest)
+        if (data.status == 200 || data.status == 201) {
+            let responseConvert = await data.json();
+            console.log(responseConvert)
+            console.log(configRequest)
 
+        } else {
+            throw "Problema ao buscar tarefas"
+        }
+
+    } catch (error) {
+        
+    }
+
+}
 
 
 /* ---------- EVENT LISTENERS ---------- */
@@ -136,6 +137,8 @@ onload = function () {
     
     if (!tokenJwt) {
         alert("You shall not pass!!")
+        //retorna usuário não logado a página principal
+        window.location.href = 'index.html'
     } else {
         getDataUser(tokenJwt)
         getUserTasks(tokenJwt)
@@ -168,15 +171,17 @@ NEW_TASK_BTN.addEventListener('click', (event) => {
 
 // Visualiza evente do clique e carrega os elementos captados pelo clique no "i"
 document.addEventListener('click', (i) =>{
+    let tokenJwt = sessionStorage.getItem("jwt")
     // Avalia se o elemento clicado é a div com a classe 'not-done' dentro da ul "tarefas-pendentes" 
     if (i.path[0].classList == 'not-done' && i.path[2].classList == 'tarefas-pendentes' ){
         let pai = i.path[2]
         let filho = i.path[1].outerHTML
         TASK_DONE.innerHTML += filho
         pai.removeChild(i.path[1])
-    } 
+        editTasks(i.path[0].id, tokenJwt)
+         
     // Avalia se o elemento clicado é a div com a classe 'not-done' dentro da ul "tarefas-terminadas" 
-    else if (i.path[0].classList == 'not-done' && i.path[2].classList == 'tarefas-terminadas'){
+    } else if (i.path[0].classList == 'not-done' && i.path[2].classList == 'tarefas-terminadas'){
         let pai = i.path[2]
         let filho = i.path[1].outerHTML
         TASK_DESCRIPTION.innerHTML += filho
