@@ -1,6 +1,7 @@
 /* ---------- VARIABLES ---------- */
 const NEW_TASK = document.getElementById('novaTarefa')
 const NEW_TASK_BTN = document.getElementById('botaoNovaTarefa')
+const FINISH_SESSION = document.getElementById('closeApp')
 const TASK_DESCRIPTION = document.querySelector('.tarefas-pendentes')
 const TASK_DONE = document.querySelector('.tarefas-terminadas')
 
@@ -188,6 +189,13 @@ NEW_TASK_BTN.addEventListener('click', (event) => {
     }
     
     newTaskApi(JSON.stringify(newTask), tokenJwt)
+})
+
+FINISH_SESSION.addEventListener('click', (event) => {
+    if(event) {
+        sessionStorage.removeItem("jwt")
+        window.location.href = 'index.html'
+    }
 })
 
 // Visualiza evente do clique e carrega os elementos captados pelo clique no "i"

@@ -53,7 +53,7 @@ function createAccValidation(firstname, lastname, email, password, repeatPasswor
 function signUpSuccess() {
   setTimeout(() => {
       location.href = "index.html"
-  }, 1000);
+  }, 800);
 
   const toast = new bootstrap.Toast(TOAST_SUCCESS)
   toast.show()
