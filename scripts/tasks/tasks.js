@@ -5,6 +5,11 @@ const FINISH_SESSION = document.getElementById('closeApp')
 const TASK_DESCRIPTION = document.querySelector('.tarefas-pendentes')
 const TASK_DONE = document.querySelector('.tarefas-terminadas')
 
+const TOAST_CREATE_SUCCESS = document.getElementById('toastSuccessCreateTask')
+const TOAST_EDIT_SUCCESS = document.getElementById('toastSuccessEditTask')
+const TOAST_DELETE_SUCCESS = document.getElementById('toastSuccessDeleteTask')
+const TOAST_ERROR = document.getElementById('toastFail')
+
 /* ---------- FUNCTIONS ---------- */
 async  function getDataUser(token) { 
     let configRequest = {
@@ -112,14 +117,16 @@ async function newTaskApi(object, token) {
       
       if(data.status == 201 || data.status == 200) {
           console.log("Tarefa criada com sucesso")
+          createTaskSuccess()
           console.log(data.json())
-          location.reload()
+        //   location.reload()
       } else {
         throw data
       }
     } catch (error) {
       if (error.status == 400 || error.status == 401) {
-        console.log("Algo deu errado e a tarefa não foi criada")  
+        console.log("Algo deu errado e a tarefa não foi criada")
+        toastError()  
       }
     }
   }
@@ -142,16 +149,38 @@ async function newTaskApi(object, token) {
             let responseConvert = await data.json();
             console.log(responseConvert)
             console.log(configRequest)
-
+            editTaskSuccess()
         } else {
             throw "Problema ao buscar tarefas"
         }
 
     } catch (error) {
-        
+        console.log(error)
+        toastError()
     }
 
 }
+
+// Toasts
+function createTaskSuccess() {
+    const toast = new bootstrap.Toast(TOAST_CREATE_SUCCESS)
+    toast.show() 
+  }
+
+function editTaskSuccess() {
+    const toast = new bootstrap.Toast(TOAST_EDIT_SUCCESS)
+    toast.show() 
+  }
+
+function deleteTaskSuccess() {
+    const toast = new bootstrap.Toast(TOAST_DELETE_SUCCESS)
+    toast.show() 
+  }
+
+function toastError() {
+    const toast = new bootstrap.Toast(TOAST_ERROR)
+    toast.show() 
+  }
 
 /* ---------- EVENT LISTENERS ---------- */
 onload = function () {
