@@ -122,6 +122,22 @@ a {
 
 /* Lista de tarefas ----------------------------------------------------------- */
 
+.titulo-pendentes {
+  position: relative;
+  width: 8em;
+  text-align: center;
+  padding: .5em 1em;
+  background-color: white;
+  border-radius: .2em;
+  box-shadow: 3px 3px 5px lightgrey;
+  color: rgb(170, 170, 170);
+  font-weight: 400;
+  font-size: 1.1em;
+  margin-left: calc(15% - 4em);
+  margin-top: 2em;
+  z-index: 20;
+}
+
 .tarefas-pendentes {
   display: flex;
   flex-direction: column;
@@ -198,7 +214,7 @@ a {
   position: relative;
   width: 8em;
   text-align: center;
-  padding: .5em 1em;
+  padding: .8em 1em;
   background-color: white;
   border-radius: .2em;
   box-shadow: 3px 3px 5px lightgrey;
