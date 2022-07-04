@@ -13,6 +13,9 @@ const exampleModal = document.getElementById('exampleModal')
 let teste;
 let tokenJwt = sessionStorage.getItem("jwt")
 let recipient;
+let completed = {
+    "completed": true
+}
 
 
 
@@ -143,20 +146,17 @@ async function newTaskApi(object, token) {
     }
   }
 
-  async  function editTasks(id, token){
+  async  function editTasks(id, token, object){
     
     let configRequest = {
         method: "PUT",
         headers: {
             
             "Content-Type": 'application/json',
-            "Access-Control-Allow-Origin": "*",
             "Authorization": token       
         },
         
-        body:{
-            "completed": true
-        }
+        body: JSON.stringify(completed)
     }
     try {
         let data = await fetch(ENDPOINT_TASKS + '/' + id, configRequest)
@@ -272,12 +272,12 @@ document.addEventListener('click', (i) =>{
     let tokenJwt = sessionStorage.getItem("jwt")
     // Avalia se o elemento clicado é a div com a classe 'not-done' dentro da ul "tarefas-pendentes" 
     if (i.path[0].classList == 'not-done' && i.path[2].classList == 'tarefas-pendentes' ){
-        let teste = i.path[0].id
+        /* let teste = i.path[0].id
         let pai = i.path[2]
         let filho = i.path[1].outerHTML
         TASK_DONE.innerHTML += filho
-        pai.removeChild(i.path[1])
-        //editTasks(i.path[0].id, tokenJwt)
+        pai.removeChild(i.path[1]) */
+        editTasks(i.path[0].id, tokenJwt)
 
             exampleModal.addEventListener('shown.bs.modal', async () => {
                 await getTasksById(tokenJwt, teste)
