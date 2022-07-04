@@ -82,10 +82,14 @@ function getTasks(tasks){
         if (i.completed == true){
             let itemlistdone = `
             <li class="tarefa" id="${i.id}">
-            <div class="not-done"></div>
+            <div class="done"></div>
             <div class="descricao">
             <p class="nome">${i.description}</p>
-            <p class="timestamp">${dateConvert}</p>
+            <div>
+            <button><i id="${i.id}" class="fas fa-undo-alt change"></i></button>
+            <button><i id="${i.id}" class="far fa-trash-alt"></i></button>
+            </div>
+
             
             </div>
             </li>`    
@@ -99,7 +103,7 @@ function getTasks(tasks){
         <div class="not-done" data-bs-toggle="modal" data-bs-target="#exampleModal" id="${i.id}"> </div>
         <div class="descricao">
         <p class="nome">${i.description}</p>
-        <p class="timestamp">Criado em: ${dateConvert}</p>
+        <p class="timestamp"><i class="far fa-calendar-alt"></i> ${dateConvert}</p>
         
         </div>
         </li>`
