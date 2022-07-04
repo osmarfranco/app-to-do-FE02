@@ -27,7 +27,7 @@ a {
   text-transform: capitalize;
 }
 
-.user-info .user-image {
+.user-info .user-image img {
   height: 2em;
   width: 2em;
   border-radius: 50%;

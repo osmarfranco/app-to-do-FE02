@@ -19,7 +19,7 @@ async  function getDataUser(token) {
             let responseConvert = await data.json();
 
             nameInNavBar(responseConvert)
-            // nameInitialsOnUserImage(responseConvert)
+            nameInitialsAvatar(responseConvert)
         } else {
             throw "Problema ao buscar usuário"
         } 
@@ -55,13 +55,13 @@ function nameInNavBar(objUser) {
     p.innerText = `${objUser.firstName} ${objUser.lastName}`
 }
 
-// function nameInitialsOnUserImage(objUser) {
-//     let div = document.getElementById('user-id')
-//     let initials = objUser.firstName[0] + objUser.lastName[0]
+// Cria um avatar com as iniciais do usuário
+function nameInitialsAvatar(objUser) {
+    let img = document.getElementById('user-image')
+    let avatarUrl = `https://ui-avatars.com/api/?name=${objUser.firstName}+${objUser.lastName}&bold=true&rounded=true`
 
-//     div.innerHTML += `<p>${initials}</p>`
-//     console.log(objUser.firstName[0] + objUser.lastName[0])
-// }
+    img.setAttribute('src', avatarUrl)
+}
 
 function getTasks(tasks){
     for ( i of tasks){
