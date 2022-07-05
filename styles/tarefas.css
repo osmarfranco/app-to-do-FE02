@@ -133,7 +133,7 @@ a {
   color: rgb(170, 170, 170);
   font-weight: 400;
   font-size: 1.1em;
-  margin-left: calc(15% - 4em);
+  margin-left: calc(15% - 2em);
   margin-top: 2em;
   z-index: 20;
 }
@@ -171,7 +171,7 @@ a {
   content: '';
   position: absolute;
   bottom: 100%;
-  left: calc(.75em - 1px);
+  left: calc(.75em - 2px);
   display: block;
   height: 3em;
   width: 2px;
@@ -182,7 +182,7 @@ a {
   content: '';
   position: absolute;
   top: 100%;
-  left: calc(.75em - 1px);
+  left: calc(.75em - 2px);
   display: block;
   height: 4.5em;
   width: 2px;
@@ -210,6 +210,54 @@ a {
 
 /* Tarefas terminadas ----------------------------------------------------------- */
 
+.tarefa .done {
+  position: relative;
+  height: 1.5em;
+  width: 1.5em;
+  background-color: lightgray;
+  box-shadow: 2px 2px 5px lightgrey;
+  border: 2px solid lightgray;
+  z-index: 2;
+  transition: background-color 200ms linear;
+}
+
+.tarefa .done:hover {
+  background-color: lightgray;
+}
+
+.tarefa:first-child .done::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: calc(.75em - 2px);
+  display: block;
+  height: 3em;
+  width: 2px;
+  background-color: lightgray;
+}
+
+.tarefa:not(:last-child) .done::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: calc(.75em - 2px);
+  display: block;
+  height: 4.5em;
+  width: 2px;
+  background-color: lightgray;
+}
+
+.done {
+  width: 2em;
+  height: 2em;
+  background-color: var(--app-grey);
+  margin-right: 1em;
+  border-radius: 50%;
+  cursor: pointer;
+  text-align: center;
+  color: grey;
+}
+
 .titulo-terminadas {
   position: relative;
   width: 8em;
@@ -221,7 +269,7 @@ a {
   color: rgb(170, 170, 170);
   font-weight: 400;
   font-size: 1.1em;
-  margin-left: calc(15% - 4em);
+  margin-left: calc(15% - 2em);
   z-index: 20;
 }
 
