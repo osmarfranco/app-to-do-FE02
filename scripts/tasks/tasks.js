@@ -10,7 +10,7 @@ const TOAST_EDIT_SUCCESS = document.getElementById('toastSuccessEditTask')
 const TOAST_DELETE_SUCCESS = document.getElementById('toastSuccessDeleteTask')
 const TOAST_ERROR = document.getElementById('toastFail')
 const exampleModal = document.getElementById('exampleModal')
-let teste;
+
 let tokenJwt = sessionStorage.getItem("jwt")
 let recipient;
 let completed = {
@@ -120,7 +120,7 @@ async  function getTasksById(token, id) {
             let responseConvert = await data.json();
             
             recipient = responseConvert;
-            console.log(recipient)
+            
             
         } else {
             throw "Problema ao buscar tarefas"

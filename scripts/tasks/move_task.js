@@ -1,7 +1,7 @@
 let listaUL = document.querySelector(".tarefas-pendentes")
 let listaULTerminadas = document.querySelector(".tarefas-terminadas")
 let divModal = document.getElementById("message-text")
-
+let taskId;
 //Altera o completed para true
 async  function editTasks(id, token, JSON){
     
@@ -16,7 +16,39 @@ async  function editTasks(id, token, JSON){
         body: JSON
     }
     try {
-        await fetch(ENDPOINT_TASKS + '/' + id, configRequest)
+        let data = await fetch(ENDPOINT_TASKS + '/' + id, configRequest)
+        if(data.status == 200 || data.status == 201) {
+           editTaskSuccess()
+            
+        }
+
+    } catch (error) {
+        console.log(error)
+        toastError()
+    }
+
+}
+
+async  function editTasksDescription(id, token, body){
+    
+    let configRequest = {
+        method: "PUT",
+        headers: {
+            
+            "Content-Type": 'application/json',
+            "Authorization": token       
+        },
+        
+        body: JSON.stringify(body)
+    }
+    try {
+        let data = await fetch(ENDPOINT_TASKS + '/' + id, configRequest)
+        if(data.status == 200 || data.status == 201) {
+           editTaskSuccess()
+            setTimeout(() => {
+                location.reload()
+            }, 800);
+        }
 
     } catch (error) {
         console.log(error)
@@ -38,7 +70,11 @@ async  function returnTasks(id, token, JSON){
         body: JSON
     }
     try {
-        await fetch(ENDPOINT_TASKS + '/' + id, configRequest)
+        let data = await fetch(ENDPOINT_TASKS + '/' + id, configRequest)
+        if(data.status == 200 || data.status == 201) {
+           editTaskSuccess()
+            
+        }
 
     } catch (error) {
         console.log(error)
@@ -52,11 +88,14 @@ async  function dellTask(id, token){
         method: "DELETE",
         headers: {
             "Authorization": token           
-        },
-        redirect: 'follow'
+        }
+        
 }
 try {
-    await fetch(ENDPOINT_TASKS + "/" + id , configRequest)
+    let data = await fetch(ENDPOINT_TASKS + "/" + id , configRequest)
+    if(data.status == 200) {
+        deleteTaskSuccess()
+    }
 
 } catch (error) {
     console.log(error)
@@ -80,7 +119,9 @@ async  function coletaDadosTasks(id, token){
         if (data.status == 200) {
             let responseConvert = await data.json();
             divModal.innerHTML =`${responseConvert.description}`
-            console.log(responseConvert.id);
+            taskId = responseConvert.id
+           
+            
 
         } else {
             throw "Problema ao buscar tarefas"
@@ -100,6 +141,9 @@ async  function coletaDadosTasks(id, token){
 function renderizaTarefas(tarefa){
     for( tarefas of tarefa){
     if(tarefas.completed == false){
+        let date = new Date(tarefas.createdAt)
+        let dateConvert = date.toLocaleDateString()
+
         let li = document.createElement("li");
         li.classList.add("tarefa");
         li.innerHTML = 
@@ -107,7 +151,7 @@ function renderizaTarefas(tarefa){
         <div class="not-done" id="${tarefas.id}" onClick="trocarTarefa(${tarefas.id})"> </div>
         <div class="descricao" onClick="passarDadosModal(${tarefas.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <p class="nome">${tarefas.description}</p>
-            <p class="timestamp"><i class="far fa-calendar-alt"></i> ${tarefas.createdAt}</p>
+            <p class="timestamp"><i class="far fa-calendar-alt"></i> ${dateConvert}</p>
         </div>
 
         `;
@@ -138,6 +182,19 @@ function renderizaTarefas(tarefa){
 function trocarTarefa(id){
     let JSON = "{\r\n  \"completed\": true\r\n}";
     editTasks(id, sessionStorage.getItem("jwt"), JSON)
+  
+}
+
+async function trocarDescricao(id){
+    await divModal
+    await taskId
+    console.log(divModal.value)
+    let body = {
+        "description": await divModal.value
+    }
+    
+
+    editTasksDescription(taskId, sessionStorage.getItem("jwt"), body)
   
 }
 
