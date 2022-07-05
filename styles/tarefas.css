@@ -36,6 +36,10 @@ a {
   margin-left: .7em;
 }
 
+#nomeUsuario {
+  margin-bottom: 0;
+}
+
 #closeApp{
   margin-left: 15px;
   font-size: .7em;
@@ -44,6 +48,7 @@ a {
   border-radius: 50vh;
   padding: 5px 10px;
   cursor: pointer;
+  margin-bottom: 0;
 }
 
 /* Nova tarefa ----------------------------------------------------------- */
@@ -201,11 +206,13 @@ a {
 
 .tarefa .nome {
   color: rgb(95, 95, 95);
+  margin-bottom: 0;
 }
 
 .tarefa .timestamp {
   font-size: .9em;
   color: rgb(134, 134, 134);
+  margin-bottom: 0;
 }
 
 /* Tarefas terminadas ----------------------------------------------------------- */
