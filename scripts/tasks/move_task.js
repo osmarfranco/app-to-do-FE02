@@ -182,6 +182,8 @@ function renderizaTarefas(tarefa){
 function trocarTarefa(id){
     let JSON = "{\r\n  \"completed\": true\r\n}";
     editTasks(id, sessionStorage.getItem("jwt"), JSON)
+    
+    
   
 }
 
@@ -195,6 +197,8 @@ async function trocarDescricao(id){
     
 
     editTasksDescription(taskId, sessionStorage.getItem("jwt"), body)
+    limpaHtml()
+    getUserTasks(sessionStorage.getItem("jwt"))
   
 }
 
@@ -202,6 +206,7 @@ async function trocarDescricao(id){
 function voltarTarefa(id){
     let JSON = "{\r\n  \"completed\": false\r\n}";
     returnTasks(id, sessionStorage.getItem("jwt"), JSON)
+    
 }
 
 // 
@@ -220,4 +225,9 @@ function passarDadosModal(id){
 
 function limpaDados(){
     divModal.innerHTML = ``
+}
+
+function limpaHtml(){
+    listaUL.remove()
+    listaULTerminadas.remove()
 }
