@@ -2,6 +2,7 @@ let listaUL = document.querySelector(".tarefas-pendentes")
 let listaULTerminadas = document.querySelector(".tarefas-terminadas")
 let divModal = document.getElementById("message-text")
 let taskId;
+let tarefa;
 //Altera o completed para true
 async  function editTasks(id, token, JSON){
     
@@ -45,9 +46,11 @@ async  function editTasksDescription(id, token, body){
         let data = await fetch(ENDPOINT_TASKS + '/' + id, configRequest)
         if(data.status == 200 || data.status == 201) {
            editTaskSuccess()
-            setTimeout(() => {
+           await tarefa
+           renderizaUmaTarefa(tarefa)
+            /* setTimeout(() => {
                 location.reload()
-            }, 800);
+            }, 800); */
         }
 
     } catch (error) {
@@ -120,6 +123,7 @@ async  function coletaDadosTasks(id, token){
             let responseConvert = await data.json();
             divModal.innerHTML =`${responseConvert.description}`
             taskId = responseConvert.id
+            tarefa = responseConvert
            
             
 
@@ -177,6 +181,10 @@ function renderizaTarefas(tarefa){
 }
 
 }}
+
+async function renderizaUmaTarefa(tarefa){
+    console.log(tarefa)
+}
 
 // função que é chamada quando se clica na div not-done
 function trocarTarefa(id){
