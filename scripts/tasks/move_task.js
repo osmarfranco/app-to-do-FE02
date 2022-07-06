@@ -234,7 +234,6 @@ async function renderizaUmaTarefa(tarefa){
 
 // função que é chamada quando se clica na div not-done
 async function trocarTarefa(id){
-    console.log(id)
     let JSON = "{\r\n  \"completed\": true\r\n}";
     editTasks(id, sessionStorage.getItem("jwt"), JSON)
     await coletaDadosTasks(id, sessionStorage.getItem("jwt"))
