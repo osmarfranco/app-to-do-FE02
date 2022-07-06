@@ -1,5 +1,5 @@
-let listaUL = document.querySelector(".tarefas-pendentes")
-let listaULTerminadas = document.querySelector(".tarefas-terminadas")
+let listaUL = document.querySelector(".tarefas-pendentes");
+let listaULTerminadas = document.querySelector(".tarefas-terminadas");
 let divModal = document.getElementById("message-text")
 let taskId;
 let tarefa;
@@ -139,6 +139,9 @@ async  function coletaDadosTasks(id, token){
 
 //pega as informções e renderiza as tarefas na tela
 function renderizaTarefas(tarefa){
+    listaUL = document.querySelector(".tarefas-pendentes");
+    listaULTerminadas = document.querySelector(".tarefas-terminadas");
+
     for( tarefas of tarefa){
     if(tarefas.completed == false){
         let date = new Date(tarefas.createdAt)
@@ -181,7 +184,8 @@ function renderizaTarefas(tarefa){
 }}
 
 async function renderizaUmaTarefa(tarefa){
-    
+    listaUL = document.querySelector(".tarefas-pendentes");
+    listaULTerminadas = document.querySelector(".tarefas-terminadas");
 
     if(tarefa.completed == false){
         let elementPai = document.getElementById(`${tarefa.id}`)
@@ -193,7 +197,7 @@ async function renderizaUmaTarefa(tarefa){
         
         let li = document.createElement("li");
         li.classList.add("tarefa");
-        li.setAttribute("id", tarefas.id)
+        li.setAttribute("id", tarefa.id)
         li.innerHTML = 
         `
         <div class="not-done" onClick="trocarTarefa(${tarefa.id})"> </div>
@@ -210,7 +214,7 @@ async function renderizaUmaTarefa(tarefa){
         elementPai.remove()
         let li = document.createElement("li");
         li.classList.add("tarefa");
-        li.setAttribute("id", tarefas.id)
+        li.setAttribute("id", tarefa.id)
         li.innerHTML = 
         `
         <div class="done"> </div>
@@ -256,7 +260,7 @@ async function trocarDescricao(id){
     await coletaDadosTasks(taskId, sessionStorage.getItem("jwt"))
     await tarefa
     renderizaUmaTarefa(tarefa)
-    limpaDados()
+    
 
     
   
