@@ -92,10 +92,8 @@ async function newTaskApi(object, token) {
       let data = await fetch(ENDPOINT_TASKS, configRequest)
       
       if(data.status == 201 || data.status == 200) {
-          console.log("Tarefa criada com sucesso")
-          createTaskSuccess()
-          console.log(data.json())
-        //   location.reload()
+        createTaskSuccess()
+
       } else {
         throw data
       }
@@ -179,7 +177,7 @@ NEW_TASK.addEventListener('input', () => {
     }
 })
 
-NEW_TASK_BTN.addEventListener('click', (event) => {
+NEW_TASK_BTN.addEventListener('click', async (event) => {
     event.preventDefault()
 
     let tokenJwt = sessionStorage.getItem("jwt")
@@ -188,7 +186,10 @@ NEW_TASK_BTN.addEventListener('click', (event) => {
         completed: false
     }
     
-    newTaskApi(JSON.stringify(newTask), tokenJwt)
+    await newTaskApi(JSON.stringify(newTask), tokenJwt)
+    await getUserTasks(tokenJwt)
+    NEW_TASK.value = '';
+    
 })
 
 FINISH_SESSION.addEventListener('click', (event) => {

@@ -47,11 +47,6 @@ async  function editTasksDescription(id, token, body){
         let data = await fetch(ENDPOINT_TASKS + '/' + id, configRequest)
         if(data.status == 200 || data.status == 201) {
            editTaskSuccess()
-           
-           
-            /* setTimeout(() => {
-                location.reload()
-            }, 800); */
         }
 
     } catch (error) {
@@ -186,7 +181,6 @@ function renderizaTarefas(tarefa){
 }}
 
 async function renderizaUmaTarefa(tarefa){
-    console.log(tarefa)
     
 
     if(tarefa.completed == false){
@@ -199,9 +193,10 @@ async function renderizaUmaTarefa(tarefa){
         
         let li = document.createElement("li");
         li.classList.add("tarefa");
+        li.setAttribute("id", tarefas.id)
         li.innerHTML = 
         `
-        <div class="not-done" id="${tarefa.id}" onClick="trocarTarefa(${tarefa.id})"> </div>
+        <div class="not-done" onClick="trocarTarefa(${tarefa.id})"> </div>
         <div class="descricao" onClick="passarDadosModal(${tarefa.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <p class="nome">${tarefa.description}</p>
             <p class="timestamp"><i class="far fa-calendar-alt"></i> ${dateConvert}</p>
@@ -215,9 +210,10 @@ async function renderizaUmaTarefa(tarefa){
         elementPai.remove()
         let li = document.createElement("li");
         li.classList.add("tarefa");
+        li.setAttribute("id", tarefas.id)
         li.innerHTML = 
         `
-        <div class="done" id="${tarefa.id}"> </div>
+        <div class="done"> </div>
         <div class="descricao">
             <p class="nome">${tarefa.description}</p>
             <div>
@@ -238,7 +234,7 @@ async function renderizaUmaTarefa(tarefa){
 
 // função que é chamada quando se clica na div not-done
 async function trocarTarefa(id){
-    
+    console.log(id)
     let JSON = "{\r\n  \"completed\": true\r\n}";
     editTasks(id, sessionStorage.getItem("jwt"), JSON)
     await coletaDadosTasks(id, sessionStorage.getItem("jwt"))
@@ -279,6 +275,8 @@ async function voltarTarefa(id){
 // 
 function deletaTarefa(id){  
     dellTask(id, sessionStorage.getItem("jwt"))
+    let elementPai = document.getElementById(id)
+        elementPai.remove()
 }
 
 
@@ -292,9 +290,4 @@ function passarDadosModal(id){
 
 function limpaDados(){
     divModal.innerHTML = ``
-}
-
-function limpaHtml(){
-    listaUL.remove()
-    listaULTerminadas.remove()
 }
