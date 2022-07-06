@@ -54,6 +54,7 @@ async  function getUserTasks(token) {
         if (data.status == 200) {
             let responseConvert = await data.json();
             renderizaTarefas(responseConvert);
+            
 
         } else {
             throw "Problema ao buscar tarefas"

@@ -3,6 +3,7 @@ let listaULTerminadas = document.querySelector(".tarefas-terminadas")
 let divModal = document.getElementById("message-text")
 let taskId;
 let tarefa;
+
 //Altera o completed para true
 async  function editTasks(id, token, JSON){
     
@@ -46,8 +47,8 @@ async  function editTasksDescription(id, token, body){
         let data = await fetch(ENDPOINT_TASKS + '/' + id, configRequest)
         if(data.status == 200 || data.status == 201) {
            editTaskSuccess()
-           await tarefa
-           renderizaUmaTarefa(tarefa)
+           
+           
             /* setTimeout(() => {
                 location.reload()
             }, 800); */
@@ -150,9 +151,10 @@ function renderizaTarefas(tarefa){
 
         let li = document.createElement("li");
         li.classList.add("tarefa");
+        li.setAttribute("id", tarefas.id);
         li.innerHTML = 
         `
-        <div class="not-done" id="${tarefas.id}" onClick="trocarTarefa(${tarefas.id})"> </div>
+        <div class="not-done"  onClick="trocarTarefa(${tarefas.id})"> </div>
         <div class="descricao" onClick="passarDadosModal(${tarefas.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <p class="nome">${tarefas.description}</p>
             <p class="timestamp"><i class="far fa-calendar-alt"></i> ${dateConvert}</p>
@@ -164,9 +166,10 @@ function renderizaTarefas(tarefa){
     }   else {  
         let li = document.createElement("li");
         li.classList.add("tarefa");
+        li.setAttribute("id", tarefas.id);
         li.innerHTML = 
         `
-        <div class="done" id="${tarefas.id}"> </div>
+        <div class="done"> </div>
         <div class="descricao">
             <p class="nome">${tarefas.description}</p>
             <div>
@@ -184,13 +187,64 @@ function renderizaTarefas(tarefa){
 
 async function renderizaUmaTarefa(tarefa){
     console.log(tarefa)
+    
+
+    if(tarefa.completed == false){
+        let elementPai = document.getElementById(`${tarefa.id}`)
+        elementPai.remove()
+        
+        
+        let date = new Date(tarefa.createdAt)
+        let dateConvert = date.toLocaleDateString()
+        
+        let li = document.createElement("li");
+        li.classList.add("tarefa");
+        li.innerHTML = 
+        `
+        <div class="not-done" id="${tarefa.id}" onClick="trocarTarefa(${tarefa.id})"> </div>
+        <div class="descricao" onClick="passarDadosModal(${tarefa.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <p class="nome">${tarefa.description}</p>
+            <p class="timestamp"><i class="far fa-calendar-alt"></i> ${dateConvert}</p>
+        </div>
+        </li>
+        `;
+
+        listaUL.appendChild(li);
+    }   else if (tarefa.completed == true){
+        let elementPai = document.getElementById(`${tarefa.id}`)
+        elementPai.remove()
+        let li = document.createElement("li");
+        li.classList.add("tarefa");
+        li.innerHTML = 
+        `
+        <div class="done" id="${tarefa.id}"> </div>
+        <div class="descricao">
+            <p class="nome">${tarefa.description}</p>
+            <div>
+                <button><i id="${tarefa.id}" class="fas fa-undo-alt change" onClick="voltarTarefa(${tarefa.id})"></i></button>
+                <button onClick="deletaTarefa(${tarefa.id})"><i id="${tarefa.id}" class="far fa-trash-alt" ></i></button>
+            </div>
+        </div>
+
+        `;
+
+        listaULTerminadas.appendChild(li);
+    } else {
+
+    }
+
+
 }
 
 // função que é chamada quando se clica na div not-done
-function trocarTarefa(id){
+async function trocarTarefa(id){
+    
     let JSON = "{\r\n  \"completed\": true\r\n}";
     editTasks(id, sessionStorage.getItem("jwt"), JSON)
-    
+    await coletaDadosTasks(id, sessionStorage.getItem("jwt"))
+    await tarefa
+    renderizaUmaTarefa(tarefa)
+
     
   
 }
@@ -198,23 +252,28 @@ function trocarTarefa(id){
 async function trocarDescricao(id){
     await divModal
     await taskId
-    console.log(divModal.value)
     let body = {
         "description": await divModal.value
     }
     
 
-    editTasksDescription(taskId, sessionStorage.getItem("jwt"), body)
-    limpaHtml()
-    getUserTasks(sessionStorage.getItem("jwt"))
+   await editTasksDescription(taskId, sessionStorage.getItem("jwt"), body)
+    await coletaDadosTasks(taskId, sessionStorage.getItem("jwt"))
+    await tarefa
+    renderizaUmaTarefa(tarefa)
+    limpaDados()
+
+    
   
 }
 
 // função que é chamada quando se clica no botão da class "fas fa-undo-alt change"
-function voltarTarefa(id){
+async function voltarTarefa(id){
     let JSON = "{\r\n  \"completed\": false\r\n}";
     returnTasks(id, sessionStorage.getItem("jwt"), JSON)
-    
+    await coletaDadosTasks(id, sessionStorage.getItem("jwt"))
+    await tarefa
+    renderizaUmaTarefa(tarefa)
 }
 
 // 
