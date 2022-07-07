@@ -11,12 +11,6 @@ const TOAST_EDIT_SUCCESS = document.getElementById('toastSuccessEditTask')
 const TOAST_DELETE_SUCCESS = document.getElementById('toastSuccessDeleteTask')
 const TOAST_ERROR = document.getElementById('toastFail')
 
-let tokenJwt = sessionStorage.getItem('jwt')
-let recipient
-let completed = {
-  completed: true
-}
-
 /* ---------- FUNCTIONS ---------- */
 async function getDataUser(token) {
   let configRequest = {
@@ -95,12 +89,14 @@ async function newTaskApi(object, token) {
 
     if (data.status == 201 || data.status == 200) {
       removeSpinnerNewTask()
+      limparTarefas()
+      await getUserTasks(tokenJwt)
       createTaskSuccess()
     } else {
       throw data
     }
   } catch (error) {
-    if (error.status == 400 || error.status == 401) {
+    if (error.status == 400 || error.status == 401 || error.status == 500) {
       console.log('Algo deu errado e a tarefa não foi criada')
       removeSpinnerNewTask()
       toastError()
@@ -108,26 +104,14 @@ async function newTaskApi(object, token) {
   }
 }
 
-async function getTasksById(token, id) {
-  let configRequest = {
-    headers: {
-      Authorization: token
-    }
-  }
-  try {
-    let data = await fetch(ENDPOINT_TASKS + '/' + id, configRequest)
+function limparTarefas() {
+    let listaUL = document.querySelector('.tarefas-pendentes')
+    let listaULTerminadas = document.querySelector('.tarefas-terminadas')
 
-    if (data.status == 200) {
-      let responseConvert = await data.json()
-
-      recipient = responseConvert
-    } else {
-      throw 'Problema ao buscar tarefas'
-    }
-  } catch (error) {
-    console.log(error)
-  }
+    listaUL.innerHTML = ''
+    listaULTerminadas.innerHTML = ''
 }
+
 
 // Toasts
 function createTaskSuccess() {
@@ -190,7 +174,8 @@ NEW_TASK_BTN.addEventListener('click', async event => {
 
   insertSpinnerNewTask()
   await newTaskApi(newTaskInJson, tokenJwt)
-  await getUserTasks(tokenJwt)
+//   limparTarefas()
+//   await getUserTasks(tokenJwt)
   NEW_TASK.value = ''
 })
 
