@@ -1,5 +1,3 @@
-// let listaUL = document.querySelector(".tarefas-pendentes");
-// let listaULTerminadas = document.querySelector(".tarefas-terminadas");
 let taskId;
 let tarefa;
 
@@ -236,7 +234,7 @@ async function renderizaUmaTarefa(tarefa){
 // função que é chamada quando se clica na div not-done
 async function trocarTarefa(id){
     let JSON = "{\r\n  \"completed\": true\r\n}";
-    editTasks(id, sessionStorage.getItem("jwt"), JSON)
+    await editTasks(id, sessionStorage.getItem("jwt"), JSON)
     await coletaDadosTasks(id, sessionStorage.getItem("jwt"))
     renderizaUmaTarefa(tarefa)
     
@@ -257,7 +255,7 @@ async function trocarDescricao(id){
 // função que é chamada quando se clica no botão da class "fas fa-undo-alt change"
 async function voltarTarefa(id){
     let JSON = "{\r\n  \"completed\": false\r\n}";
-    returnTasks(id, sessionStorage.getItem("jwt"), JSON)
+    await returnTasks(id, sessionStorage.getItem("jwt"), JSON)
     await coletaDadosTasks(id, sessionStorage.getItem("jwt"))
     renderizaUmaTarefa(tarefa)
 }
