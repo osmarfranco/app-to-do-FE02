@@ -215,6 +215,33 @@ a {
   margin-bottom: 0;
 }
 
+
+.editar-tarefa {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+}
+
+.editar-tarefa input {
+  border: none;
+  flex: 1;
+  border-bottom: 1px solid lightgrey;
+  border-radius: 0;
+  font-size: 1.1em;
+}
+
+.editar-tarefa input:focus {
+  outline: none;
+  border-bottom: 1px solid grey;
+}
+
+.editar-tarefa button img {
+  height: 100%;
+  width: 100%;
+}
+
 /* Tarefas terminadas ----------------------------------------------------------- */
 
 .tarefa .done {

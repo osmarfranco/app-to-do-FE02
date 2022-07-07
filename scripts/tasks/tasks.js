@@ -9,7 +9,6 @@ const TOAST_CREATE_SUCCESS = document.getElementById('toastSuccessCreateTask')
 const TOAST_EDIT_SUCCESS = document.getElementById('toastSuccessEditTask')
 const TOAST_DELETE_SUCCESS = document.getElementById('toastSuccessDeleteTask')
 const TOAST_ERROR = document.getElementById('toastFail')
-const exampleModal = document.getElementById('exampleModal')
 
 let tokenJwt = sessionStorage.getItem("jwt")
 let recipient;
