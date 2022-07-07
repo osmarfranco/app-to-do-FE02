@@ -1,6 +1,7 @@
 /* ---------- VARIABLES ---------- */
 const NEW_TASK = document.getElementById('novaTarefa')
 const NEW_TASK_BTN = document.getElementById('botaoNovaTarefa')
+const NEW_TASK_BTN_IMG = document.getElementById('imagemBotaoNovaTarefa')
 const FINISH_SESSION = document.getElementById('closeApp')
 const TASK_DESCRIPTION = document.querySelector('.tarefas-pendentes')
 const TASK_DONE = document.querySelector('.tarefas-terminadas')
@@ -99,6 +100,7 @@ async function newTaskApi(object, token) {
       let data = await fetch(ENDPOINT_TASKS, configRequest)
       
       if(data.status == 201 || data.status == 200) {
+        removeSpinnerNewTask()
         createTaskSuccess()
 
       } else {
@@ -107,6 +109,7 @@ async function newTaskApi(object, token) {
     } catch (error) {
       if (error.status == 400 || error.status == 401) {
         console.log("Algo deu errado e a tarefa não foi criada")
+        removeSpinnerNewTask()
         toastError()  
       }
     }
@@ -195,6 +198,7 @@ NEW_TASK_BTN.addEventListener('click', async (event) => {
         completed: false
     }
     
+    insertSpinnerNewTask()
     await newTaskApi(JSON.stringify(newTask), tokenJwt)
     await getUserTasks(tokenJwt)
     NEW_TASK.value = '';

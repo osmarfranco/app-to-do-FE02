@@ -286,7 +286,7 @@ function editarTarefa(id){
       <form class="editar-tarefa">
         <input id="editandoTarefa" type="text">
         <button id="editar-tarefa" class="button-blocked" type="button" onClick="trocarDescricao(${id}) disabled">
-          <img src="./assets/ok.png" alt="Adicionar uma nova tarefa">
+          <img id="editIMG"src="./assets/ok.png" alt="Confirmar alteração da sua tarefa">
         </button>
       </form>
     </div>
@@ -295,9 +295,14 @@ function editarTarefa(id){
     let conteudo = document.getElementById('editandoTarefa')
     conteudo.value = descricao
 
-    // Event Listeners para os elementos recém criados
+    // Constantes, Funções e Event Listeners para os elementos recém criados
     const EDIT_TASK = document.getElementById('editandoTarefa')
     const EDIT_TASK_BTN = document.getElementById('editar-tarefa')
+    const EDIT_TASK_BTN_IMG = document.getElementById('editIMG')
+
+    function insertSpinnerEditTask() {
+        EDIT_TASK_BTN_IMG.setAttribute('src', "../assets/270-ring.svg")
+      }
 
     EDIT_TASK.addEventListener('input', () => {
         if(EDIT_TASK.value.match(VALID_TASK_REQ)){
@@ -310,8 +315,9 @@ function editarTarefa(id){
             EDIT_TASK_BTN.setAttribute('disabled', true)
         }
     })
-
+    
     EDIT_TASK_BTN.addEventListener('click', () => {
+        insertSpinnerEditTask()
         trocarDescricao(id)
     })
 }

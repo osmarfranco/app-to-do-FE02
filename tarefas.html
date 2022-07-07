@@ -29,6 +29,7 @@
   <script src="./scripts/utils/api-elements.js" defer></script>
   <script src="./scripts/utils/validation.js" defer></script>
   <script src="./animations/skeleton.js" defer></script>
+  <script src="./animations/spinner.js" defer></script>
   <script src="./scripts/tasks/move_task.js" defer></script>
   <script src="./scripts/tasks/tasks.js" defer></script>
   
@@ -55,7 +56,7 @@
     <div class="not-done"></div>
     <input id="novaTarefa" type="text" placeholder="Nova tarefa">
     <button id="botaoNovaTarefa" class="button-blocked" type="submit" disabled>
-      <img src="./assets/plus.png" alt="Adicionar uma nova tarefa">
+      <img id="imagemBotaoNovaTarefa" src="./assets/plus.png" alt="Adicionar uma nova tarefa">
     </button>
   </form>
 
