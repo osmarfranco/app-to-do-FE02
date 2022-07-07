@@ -146,6 +146,7 @@ function renderizaTarefas(tarefa){
     if(tarefas.completed == false){
         let date = new Date(tarefas.createdAt)
         let dateConvert = date.toLocaleDateString()
+        let hourConvert = date.toLocaleTimeString()
 
         let li = document.createElement("li");
         li.classList.add("tarefa");
@@ -155,7 +156,7 @@ function renderizaTarefas(tarefa){
         <div class="not-done"  onClick="trocarTarefa(${tarefas.id})"> </div>
         <div class="descricao" onClick="passarDadosModal(${tarefas.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <p class="nome">${tarefas.description}</p>
-            <p class="timestamp"><i class="far fa-calendar-alt"></i> ${dateConvert}</p>
+            <p class="timestamp"><i class="far fa-calendar-alt"></i> ${dateConvert} às ${hourConvert}</p>
         </div>
 
         `;
@@ -194,6 +195,7 @@ async function renderizaUmaTarefa(tarefa){
         
         let date = new Date(tarefa.createdAt)
         let dateConvert = date.toLocaleDateString()
+        let hourConvert = date.toLocaleTimeString()
         
         let li = document.createElement("li");
         li.classList.add("tarefa");
@@ -203,7 +205,7 @@ async function renderizaUmaTarefa(tarefa){
         <div class="not-done" onClick="trocarTarefa(${tarefa.id})"> </div>
         <div class="descricao" onClick="passarDadosModal(${tarefa.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <p class="nome">${tarefa.description}</p>
-            <p class="timestamp"><i class="far fa-calendar-alt"></i> ${dateConvert}</p>
+            <p class="timestamp"><i class="far fa-calendar-alt"></i> ${dateConvert} às ${hourConvert}</p>
         </div>
         </li>
         `;
