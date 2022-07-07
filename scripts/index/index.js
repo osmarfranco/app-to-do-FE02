@@ -76,7 +76,8 @@ async function loginApi(object) {
       }
     } catch (error) {
       if (error.status == 400 || error.status == 404) {
-        loginError("Email e/ou senha inválidos")  
+        loginError("Email e/ou senha inválidos")
+        removeSpinnerLogin() 
       }
     }
 }
@@ -131,6 +132,7 @@ ACCESS_BUTTON.addEventListener('click', function (event) {
     let userObjInJson = JSON.stringify(userObj)
     console.log(userObjInJson)
 
+    insertSpinnerLogin()
     loginApi(userObjInJson)
   }
 })

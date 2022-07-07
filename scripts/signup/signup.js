@@ -83,7 +83,8 @@ async function signUpApi(object) {
     }
   } catch (error) {
     if (error.status == 400 || error.status == 404) {
-      signUpError()  
+      signUpError()
+      removeSpinnerSignUp()  
     }
   }
 }
@@ -325,6 +326,7 @@ CREATE_ACC_BUTTON.addEventListener('click', function (event) {
 
     let newUserObjInJson = JSON.stringify(newUserObj)
 
+    insertSpinnerSignUp()
     signUpApi(newUserObjInJson)
   }
 })
