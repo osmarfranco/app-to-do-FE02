@@ -1,5 +1,5 @@
-let listaUL = document.querySelector(".tarefas-pendentes");
-let listaULTerminadas = document.querySelector(".tarefas-terminadas");
+// let listaUL = document.querySelector(".tarefas-pendentes");
+// let listaULTerminadas = document.querySelector(".tarefas-terminadas");
 let taskId;
 let tarefa;
 
@@ -136,10 +136,10 @@ async  function coletaDadosTasks(id, token){
 
 //pega as informações e renderiza as tarefas na tela
 function renderizaTarefas(tarefa){
-    listaUL = document.querySelector(".tarefas-pendentes");
-    listaULTerminadas = document.querySelector(".tarefas-terminadas");
+    let listaUL = document.querySelector(".tarefas-pendentes");
+    let listaULTerminadas = document.querySelector(".tarefas-terminadas");
 
-    for( tarefas of tarefa){
+    for(tarefas of tarefa){
     if(tarefas.completed == false){
         let date = new Date(tarefas.createdAt)
         let dateConvert = date.toLocaleDateString()
@@ -182,9 +182,9 @@ function renderizaTarefas(tarefa){
 }}
 
 async function renderizaUmaTarefa(tarefa){
-    listaUL = document.querySelector(".tarefas-pendentes");
-    listaULTerminadas = document.querySelector(".tarefas-terminadas");
-
+    let listaUL = document.querySelector(".tarefas-pendentes");
+    let listaULTerminadas = document.querySelector(".tarefas-terminadas");
+    
     if(tarefa.completed == false){
         let elementPai = document.getElementById(`${tarefa.id}`)
         elementPai.remove()
@@ -231,8 +231,6 @@ async function renderizaUmaTarefa(tarefa){
     } else {
 
     }
-
-
 }
 
 // função que é chamada quando se clica na div not-done
@@ -240,9 +238,7 @@ async function trocarTarefa(id){
     let JSON = "{\r\n  \"completed\": true\r\n}";
     editTasks(id, sessionStorage.getItem("jwt"), JSON)
     await coletaDadosTasks(id, sessionStorage.getItem("jwt"))
-    await tarefa
     renderizaUmaTarefa(tarefa)
-
     
   
 }
@@ -255,7 +251,6 @@ async function trocarDescricao(id){
     }
     await editTasksDescription(taskId, sessionStorage.getItem("jwt"), body)
     await coletaDadosTasks(taskId, sessionStorage.getItem("jwt"))
-    await tarefa
     renderizaUmaTarefa(tarefa)
 }
 
@@ -264,7 +259,6 @@ async function voltarTarefa(id){
     let JSON = "{\r\n  \"completed\": false\r\n}";
     returnTasks(id, sessionStorage.getItem("jwt"), JSON)
     await coletaDadosTasks(id, sessionStorage.getItem("jwt"))
-    await tarefa
     renderizaUmaTarefa(tarefa)
 }
 
