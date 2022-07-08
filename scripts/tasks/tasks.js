@@ -2,7 +2,7 @@
 const NEW_TASK = document.getElementById('novaTarefa')
 const NEW_TASK_BTN = document.getElementById('botaoNovaTarefa')
 const NEW_TASK_BTN_IMG = document.getElementById('imagemBotaoNovaTarefa')
-const FINISH_SESSION = document.getElementById('closeApp')
+const LOG_OUT = document.getElementById('closeApp')
 const TASK_DESCRIPTION = document.querySelector('.tarefas-pendentes')
 const TASK_DONE = document.querySelector('.tarefas-terminadas')
 
@@ -12,7 +12,7 @@ const TOAST_DELETE_SUCCESS = document.getElementById('toastSuccessDeleteTask')
 const TOAST_ERROR = document.getElementById('toastFail')
 
 /* ---------- FUNCTIONS ---------- */
-async function getDataUser(token) {
+async function getUserData(token) {
   let configRequest = {
     headers: {
       Authorization: token
@@ -49,7 +49,7 @@ async function getUserTasks(token) {
       setTimeout(() => {
         removeSkeleton('.tarefas-pendentes')
         removeSkeleton('.tarefas-terminadas')
-        renderizaTarefas(responseConvert)
+        renderTasks(responseConvert)
       }, 1500)
     } else {
       throw 'Problema ao buscar tarefas'
@@ -61,6 +61,7 @@ async function getUserTasks(token) {
   }
 }
 
+// Coloca o nome do usuário na navbar
 function nameInNavBar(objUser) {
   let p = document.querySelector('#nomeUsuario')
 
@@ -74,44 +75,6 @@ function nameInitialsAvatar(objUser) {
 
   img.setAttribute('src', avatarUrl)
 }
-
-async function newTaskApi(object, token) {
-  let configRequest = {
-    method: 'POST',
-    headers: {
-      'Content-type': 'Application/json',
-      Authorization: token
-    },
-    body: object
-  }
-  try {
-    let data = await fetch(ENDPOINT_TASKS, configRequest)
-
-    if (data.status == 201 || data.status == 200) {
-      removeSpinnerNewTask()
-      limparTarefas()
-      await getUserTasks(tokenJwt)
-      createTaskSuccess()
-    } else {
-      throw data
-    }
-  } catch (error) {
-    if (error.status == 400 || error.status == 401 || error.status == 500) {
-      console.log('Algo deu errado e a tarefa não foi criada')
-      removeSpinnerNewTask()
-      toastError()
-    }
-  }
-}
-
-function limparTarefas() {
-    let listaUL = document.querySelector('.tarefas-pendentes')
-    let listaULTerminadas = document.querySelector('.tarefas-terminadas')
-
-    listaUL.innerHTML = ''
-    listaULTerminadas.innerHTML = ''
-}
-
 
 // Toasts
 function createTaskSuccess() {
@@ -145,7 +108,7 @@ onload = function () {
   } else {
     showSkeletons(4, '.tarefas-pendentes')
     showSkeletons(4, '.tarefas-terminadas')
-    getDataUser(tokenJwt)
+    getUserData(tokenJwt)
     getUserTasks(tokenJwt)
   }
 }
@@ -174,12 +137,12 @@ NEW_TASK_BTN.addEventListener('click', async event => {
 
   insertSpinnerNewTask()
   await newTaskApi(newTaskInJson, tokenJwt)
-//   limparTarefas()
+//   clearTasks()
 //   await getUserTasks(tokenJwt)
   NEW_TASK.value = ''
 })
 
-FINISH_SESSION.addEventListener('click', event => {
+LOG_OUT.addEventListener('click', event => {
   if (event) {
     sessionStorage.removeItem('jwt')
     window.location.href = 'index.html'
