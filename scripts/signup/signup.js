@@ -14,8 +14,8 @@ const REPEAT_PASSWORD_VALIDATION = document.getElementById('repeatPasswordValida
 
 const TOAST_SUCCESS = document.getElementById('toastSuccess')
 const TOAST_FAIL = document.getElementById('toastFail')
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+const TOOLTIP_TRIGGER_LIST = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const TOOLTIP_LIST = [...TOOLTIP_TRIGGER_LIST].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
 let newUserObj = {
   firstName: '',
@@ -25,7 +25,13 @@ let newUserObj = {
 }
 
 /* ---------- FUNCTIONS ---------- */
-function createAccValidation(firstname, lastname, email, password, repeatPassword) {
+function createAccValidation(
+  firstname,
+  lastname,
+  email,
+  password,
+  repeatPassword
+) {
   if (
     firstname &&
     lastname &&
@@ -52,8 +58,8 @@ function createAccValidation(firstname, lastname, email, password, repeatPasswor
 
 function signUpSuccess() {
   setTimeout(() => {
-      location.href = "index.html"
-  }, 800);
+    location.href = './index.html'
+  }, 800)
 
   const toast = new bootstrap.Toast(TOAST_SUCCESS)
   toast.show()
@@ -61,30 +67,30 @@ function signUpSuccess() {
 
 function signUpError() {
   const toast = new bootstrap.Toast(TOAST_FAIL)
-  toast.show() 
+  toast.show()
 }
 
 async function signUpApi(object) {
   let configRequest = {
-      method:"POST",
-      headers: {
-          "Content-type": "Application/json"
-      },
-      body: object
-    }
+    method: 'POST',
+    headers: {
+      'Content-type': 'Application/json'
+    },
+    body: object
+  }
 
   try {
     let data = await fetch(ENDPOINT_USERS, configRequest)
-    
-    if(data.status == 201 || data.status == 200) {
-        signUpSuccess()
+
+    if (data.status == 201 || data.status == 200) {
+      signUpSuccess()
     } else {
       throw data
     }
   } catch (error) {
     if (error.status == 400 || error.status == 404) {
       signUpError()
-      removeSpinnerSignUp()  
+      removeSpinnerSignUp()
     }
   }
 }
@@ -202,22 +208,22 @@ PASSWORD.addEventListener('input', () => {
   if (PASSWORD.value === '') {
     PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
     PASSWORD.classList.add('form-error')
-  } else if (!PASSWORD.value.match(VALID_PASSWORD_REQ)){
-    PASSWORD_VALIDATION.innerText = 
-      `As senhas devem conter pelo menos: 
-        - 8 caracteres
-        - 1 Letra Maiúscula
-        - 1 Número
-        - 1 Símbolo`
-      PASSWORD.classList.add('form-error')
-  } else if (PASSWORD.value === REPEAT_PASSWORD.value || (PASSWORD.value && REPEAT_PASSWORD.value === '')) {
+  } else if (!PASSWORD.value.match(VALID_PASSWORD_REQ)) {
+    PASSWORD_VALIDATION.innerText = `As senhas devem conter pelo menos: 
+    8 caracteres, 1 letra maiúscula,
+    1 número e 1 símbolo.`
+    PASSWORD.classList.add('form-error')
+  } else if (
+    PASSWORD.value === REPEAT_PASSWORD.value ||
+    (PASSWORD.value && REPEAT_PASSWORD.value === '')
+  ) {
     PASSWORD_VALIDATION.innerText = ''
     PASSWORD.classList.remove('form-error')
     REPEAT_PASSWORD_VALIDATION.innerText = ''
     REPEAT_PASSWORD.classList.remove('form-error')
   } else {
     REPEAT_PASSWORD_VALIDATION.innerText = 'As senhas devem ser iguais'
-    REPEAT_PASSWORD.classList.add('form-error') 
+    REPEAT_PASSWORD.classList.add('form-error')
   }
   createAccValidation(
     FIRST_NAME.value,
@@ -228,26 +234,26 @@ PASSWORD.addEventListener('input', () => {
   )
 })
 
-PASSWORD.addEventListener('blur', () => {  
+PASSWORD.addEventListener('blur', () => {
   if (PASSWORD.value === '') {
     PASSWORD_VALIDATION.innerText = 'Campo obrigatório'
     PASSWORD.classList.add('form-error')
-  } else if (!PASSWORD.value.match(VALID_PASSWORD_REQ)){
-    PASSWORD_VALIDATION.innerText = 
-      `As senhas devem conter pelo menos: 
-        - 8 caracteres
-        - 1 Letra Maiúscula
-        - 1 Número
-        - 1 Símbolo`
-      PASSWORD.classList.add('form-error')
-  } else if (PASSWORD.value === REPEAT_PASSWORD.value || (PASSWORD.value && REPEAT_PASSWORD.value === '')) {
+  } else if (!PASSWORD.value.match(VALID_PASSWORD_REQ)) {
+    PASSWORD_VALIDATION.innerText = `As senhas devem conter pelo menos: 
+        8 caracteres, 1 letra maiúscula,
+        1 número e 1 símbolo.`
+    PASSWORD.classList.add('form-error')
+  } else if (
+    PASSWORD.value === REPEAT_PASSWORD.value ||
+    (PASSWORD.value && REPEAT_PASSWORD.value === '')
+  ) {
     PASSWORD_VALIDATION.innerText = ''
     PASSWORD.classList.remove('form-error')
     REPEAT_PASSWORD_VALIDATION.innerText = ''
     REPEAT_PASSWORD.classList.remove('form-error')
   } else {
     REPEAT_PASSWORD_VALIDATION.innerText = 'As senhas devem ser iguais'
-    REPEAT_PASSWORD.classList.add('form-error') 
+    REPEAT_PASSWORD.classList.add('form-error')
   }
   createAccValidation(
     FIRST_NAME.value,
@@ -268,7 +274,7 @@ REPEAT_PASSWORD.addEventListener('input', () => {
   } else {
     REPEAT_PASSWORD_VALIDATION.innerText = 'As senhas devem ser iguais'
     REPEAT_PASSWORD.classList.add('form-error')
-  } 
+  }
   createAccValidation(
     FIRST_NAME.value,
     LAST_NAME.value,
@@ -288,7 +294,7 @@ REPEAT_PASSWORD.addEventListener('blur', () => {
   } else {
     REPEAT_PASSWORD_VALIDATION.innerText = 'As senhas devem ser iguais'
     REPEAT_PASSWORD.classList.add('form-error')
-  } 
+  }
   createAccValidation(
     FIRST_NAME.value,
     LAST_NAME.value,
