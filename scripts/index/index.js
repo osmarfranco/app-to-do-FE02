@@ -35,51 +35,47 @@ function loginValidation(email, password) {
 }
 
 function loginSuccess(successResult) {
-  sessionStorage.setItem("jwt", successResult.jwt)
-  
-  
+  sessionStorage.setItem('jwt', successResult.jwt)
   const toast = new bootstrap.Toast(TOAST_SUCCESS)
 
   toast.show()
 
   setTimeout(() => {
-    location.href = "tarefas.html"
-}, 1000);
-  
+    location.href = './tarefas.html'
+  }, 1000)
 }
 
 function loginError(errorResult) {
-  console.log(errorResult);
+  console.log(errorResult)
   const toast = new bootstrap.Toast(TOAST_FAIL)
 
   toast.show()
-  
 }
 
 async function loginApi(object) {
-    let configRequest = {
-        method:"POST",
-        headers: {
-            "Content-type": "Application/json"
-        },
-        body: object
-      }
+  let configRequest = {
+    method: 'POST',
+    headers: {
+      'Content-type': 'Application/json'
+    },
+    body: object
+  }
 
-    try {
-      let data = await fetch(ENDPOINT_USERS_LOGIN, configRequest)
-      
-      if(data.status == 201 || data.status == 200) {
-          let json = await data.json()
-          loginSuccess(json)
-      } else {
-        throw data
-      }
-    } catch (error) {
-      if (error.status == 400 || error.status == 404) {
-        loginError("Email e/ou senha inválidos")
-        removeSpinnerLogin() 
-      }
+  try {
+    let data = await fetch(ENDPOINT_USERS_LOGIN, configRequest)
+
+    if (data.status == 201 || data.status == 200) {
+      let json = await data.json()
+      loginSuccess(json)
+    } else {
+      throw data
     }
+  } catch (error) {
+    if (error.status == 400 || error.status == 404) {
+      loginError('Email e/ou senha inválidos')
+      removeSpinnerLogin()
+    }
+  }
 }
 
 /* ---------- EVENT LISTENERS ---------- */
