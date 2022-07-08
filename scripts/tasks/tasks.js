@@ -145,6 +145,6 @@ NEW_TASK_BTN.addEventListener('click', async event => {
 LOG_OUT.addEventListener('click', event => {
   if (event) {
     sessionStorage.removeItem('jwt')
-    window.location.href = 'index.html'
+    window.location.href = './index.html'
   }
 })
