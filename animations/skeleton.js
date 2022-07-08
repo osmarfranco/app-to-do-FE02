@@ -1,17 +1,17 @@
-function renderizarSkeletons(quantidade, conteiner) {
-    // Selecionamos o conteiner
-    const conteinerTarefas = document.querySelector(conteiner);
+function showSkeletons(quantity, container) {
+    // Selecionamos o container
+    const TASKS_CONTAINER = document.querySelector(container);
     
     // Criamos um array que terá um lenght igual ao número de
     //skeletons que queremos renderizar
-    const skeletons = Array.from({ length: quantidade});
+    const SKELETONS = Array.from({ length: quantity});
     
     // Iteramos sobre o array acessando cada elemento
-    skeletons.forEach(() => {
-      // Guardamos o HTML de cada skeleton. Adicionamos uma classe com o seletor do conteiner
-      // Isso nos permitirá posteriormente eliminar os skeletons do referido conteiner
-      const template = `
-      <li class="skeleton-conteiner ${conteiner.replace(".","")}-child">
+    SKELETONS.forEach(() => {
+      // Guardamos o HTML de cada skeleton. Adicionamos uma classe com o seletor do container
+      // Isso nos permitirá posteriormente eliminar os skeletons do referido container
+      const TEMPLATE = `
+      <li class="skeleton-container ${container.replace(".","")}-child">
         <div class="skeleton-card">
           <p class="skeleton-text"></p>
           <p class="skeleton-text"></p>
@@ -19,20 +19,20 @@ function renderizarSkeletons(quantidade, conteiner) {
       </li>
     `;
     
-      // Inserimos o HTML dentro do conteiner
-      conteinerTarefas.innerHTML += template;
+      // Inserimos o HTML dentro do container
+      TASKS_CONTAINER.innerHTML += TEMPLATE;
     });
 }
 
-function removerSkeleton(conteiner) {
-    // Selecionamos o conteiner
-    const conteinerTarefas = document.querySelector(conteiner);
+function removeSkeleton(container) {
+    // Selecionamos o container
+    const TASKS_CONTAINER = document.querySelector(container);
     
-    // Selecionamos todos os skeletons dentro deste conteiner
-    const skeletons = document.querySelectorAll(`${conteiner}-child`);
+    // Selecionamos todos os skeletons dentro deste container
+    const SKELETONS = document.querySelectorAll(`${container}-child`);
     
     // Iteramos sobre a lista de skeletons e removemos cada um deles
-    // do referido conteiner
-    skeletons.forEach((skeleton) => conteinerTarefas.removeChild(skeleton));
+    // do referido container
+    SKELETONS.forEach((skeleton) => TASKS_CONTAINER.removeChild(skeleton));
 }
    

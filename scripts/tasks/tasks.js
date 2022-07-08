@@ -47,16 +47,16 @@ async function getUserTasks(token) {
       let responseConvert = await data.json()
 
       setTimeout(() => {
-        removerSkeleton('.tarefas-pendentes')
-        removerSkeleton('.tarefas-terminadas')
+        removeSkeleton('.tarefas-pendentes')
+        removeSkeleton('.tarefas-terminadas')
         renderizaTarefas(responseConvert)
       }, 1500)
     } else {
       throw 'Problema ao buscar tarefas'
     }
   } catch (error) {
-    removerSkeleton('.tarefas-pendentes')
-    removerSkeleton('.tarefas-terminadas')
+    removeSkeleton('.tarefas-pendentes')
+    removeSkeleton('.tarefas-terminadas')
     console.log(error)
   }
 }
@@ -143,8 +143,8 @@ onload = function () {
     //retorna usuário não logado a página principal
     window.location.href = 'index.html'
   } else {
-    renderizarSkeletons(4, '.tarefas-pendentes')
-    renderizarSkeletons(4, '.tarefas-terminadas')
+    showSkeletons(4, '.tarefas-pendentes')
+    showSkeletons(4, '.tarefas-terminadas')
     getDataUser(tokenJwt)
     getUserTasks(tokenJwt)
   }
