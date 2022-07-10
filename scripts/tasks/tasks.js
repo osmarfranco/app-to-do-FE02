@@ -51,6 +51,7 @@ async function getUserTasks(token) {
         removeSkeleton('.tarefas-terminadas')
         renderTasks(responseConvert)
       }, 1500)
+      //1500
     } else {
       throw 'Problema ao buscar tarefas'
     }

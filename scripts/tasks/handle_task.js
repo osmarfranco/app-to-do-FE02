@@ -263,7 +263,7 @@ function renderTasks(task) {
         <div class="done"> </div>
         <div class="descricao">
             <p class="nome">${tasks.description}</p>
-            <div>
+            <div style="display:flex">
                 <button><i id="${tasks.id}" class="fas fa-undo-alt change" onClick="returnTask(${tasks.id})"></i></button>
                 <button onClick="deleteTask(${tasks.id})"><i id="${tasks.id}" class="far fa-trash-alt" ></i></button>
             </div>
@@ -311,7 +311,7 @@ async function renderOnlyOneTask(task) {
         <div class="done"> </div>
         <div class="descricao">
             <p class="nome">${task.description}</p>
-            <div>
+            <div style="display:flex">
                 <button><i id="${task.id}" class="fas fa-undo-alt change" onClick="returnTask(${task.id})"></i></button>
                 <button onClick="deleteTask(${task.id})"><i id="${task.id}" class="far fa-trash-alt" ></i></button>
             </div>

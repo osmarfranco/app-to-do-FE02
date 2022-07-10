@@ -17,9 +17,9 @@
     
    .skeleton-text {
     animation: loadingTextAnimation 2s linear infinite;
-    width: 150px;
-    display: block;
-    padding: 0.7rem;
+    max-width: 10rem;
+    min-width: 4rem;
+    padding: 0.5rem;
    }
     
    @keyframes loadingContainerAnimation {
