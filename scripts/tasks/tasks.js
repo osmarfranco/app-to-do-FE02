@@ -2,7 +2,6 @@
 const NEW_TASK = document.getElementById('novaTarefa')
 const NEW_TASK_BTN = document.getElementById('botaoNovaTarefa')
 const NEW_TASK_BTN_IMG = document.getElementById('imagemBotaoNovaTarefa')
-const LOG_OUT = document.getElementById('closeApp')
 const TASK_DESCRIPTION = document.querySelector('.tarefas-pendentes')
 const TASK_DONE = document.querySelector('.tarefas-terminadas')
 
@@ -77,6 +76,12 @@ function nameInitialsAvatar(objUser) {
   img.setAttribute('src', avatarUrl)
 }
 
+//Finalizar sessão
+function logOut() {
+  sessionStorage.removeItem('jwt')
+  window.location.href = './index.html'
+}
+
 // Toasts
 function createTaskSuccess() {
   const toast = new bootstrap.Toast(TOAST_CREATE_SUCCESS)
@@ -141,11 +146,4 @@ NEW_TASK_BTN.addEventListener('click', async event => {
   clearTasks()
   await getNewTaskList(tokenJwt)
   NEW_TASK.value = ''
-})
-
-LOG_OUT.addEventListener('click', event => {
-  if (event) {
-    sessionStorage.removeItem('jwt')
-    window.location.href = './index.html'
-  }
 })

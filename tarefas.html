@@ -46,8 +46,7 @@
     <div class="user-info">
       <p id="nomeUsuario"></p>
       <div class="user-image"><img src="" id="user-image"></div>
-      <p id="closeApp">Finalizar sessão</i>
-      </p>
+      <p id="closeApp" data-bs-toggle="modal" data-bs-target="#logout">Finalizar sessão</p>
     </div>
   </header>
 
@@ -117,6 +116,25 @@
           <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
     </div>  
+  </div>
+
+  <!-- Modal para logout -->
+  <div class="modal fade" id="logout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5> -->
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Você realmente deseja sair?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-danger" onclick="logOut()">Sim</button>
+        </div>
+      </div>
+    </div>
   </div>
 
 </body>
