@@ -138,8 +138,8 @@ NEW_TASK_BTN.addEventListener('click', async event => {
 
   insertSpinnerNewTask()
   await newTaskApi(newTaskInJson, tokenJwt)
-//   clearTasks()
-//   await getUserTasks(tokenJwt)
+  clearTasks()
+  await getNewTaskList(tokenJwt)
   NEW_TASK.value = ''
 })
 

@@ -50,8 +50,8 @@ async function newTaskApi(object, token) {
 
     if (data.status == 201 || data.status == 200) {
       removeSpinnerNewTask()
-      clearTasks()
-      await getUserTasks(tokenJwt)
+      // clearTasks()
+      // await getUserTasks(tokenJwt)
       createTaskSuccess()
     } else {
       throw data
@@ -62,6 +62,28 @@ async function newTaskApi(object, token) {
       removeSpinnerNewTask()
       toastError()
     }
+  }
+}
+
+// Retorna a lista atualizada de tarefas após a criação de uma nova
+async function getNewTaskList(token) {
+  let configRequest = {
+    headers: {
+      Authorization: token
+    }
+  }
+  try {
+    let data = await fetch(ENDPOINT_TASKS, configRequest)
+
+    if (data.status == 200) {
+      let responseConvert = await data.json()
+
+        renderTasks(responseConvert)
+    } else {
+      throw 'Problema ao buscar tarefas'
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
 
