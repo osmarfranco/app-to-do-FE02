@@ -7,6 +7,7 @@ body{
 h1 {
   color: rgb(116, 116, 116);
   font-weight: 300;
+  font-size: 2em;
   margin: .5em 0;
 }
 
@@ -69,30 +70,35 @@ button {
   font-size: 1em;
 }
 
-.form-header {
+.form-header p {
   color: grey;
   font-size: 2em;
+  margin-bottom: 0;
 }
+
 .ingressar{
   text-align: center;
 }
-.left{
 
+.left{
   background-color: white;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 1;
 }
+
 .left img{
-  width:60%;
+  width: 60%;
 }
+
 .right{
- 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex: 1;
 }
 
 .form-error, .form-error:focus{
@@ -103,9 +109,12 @@ button {
 .blocked-button{
   background-color: var(--disabled);
 }
+
 .cont{
   display: flex;
+  width: 100%;
 }
+
 @media only screen and (max-width: 512px){
   .cont{
     display: block;
