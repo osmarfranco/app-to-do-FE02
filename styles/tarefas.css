@@ -372,7 +372,7 @@ a {
   .tarefa:first-child .not-done::before{
     display: none;
   }
-  .tarefa:first-child .done::after{
+  .tarefa:not(:last-child) .done::after{
     display: none;
   }
   .tarefa:first-child .done::before{
