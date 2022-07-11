@@ -176,7 +176,7 @@ a {
   bottom: 100%;
   left: calc(.75em - 2px);
   display: block;
-  height: 3em;
+  height: 4rem;
   width: 2px;
   background-color: var(--secondary);
 }
@@ -187,7 +187,7 @@ a {
   top: 100%;
   left: calc(.75em - 2px);
   display: block;
-  height: 3rem;
+  height: 4rem;
   width: 2px;
   background-color: var(--secondary);
 }
@@ -271,7 +271,7 @@ a {
   bottom: 100%;
   left: calc(.75em - 2px);
   display: block;
-  height: 3em;
+  height: 4rem;
   width: 2px;
   background-color: lightgray;
 }
@@ -282,7 +282,7 @@ a {
   top: 100%;
   left: calc(.75em - 2px);
   display: block;
-  height: 4.5em;
+  height: 4rem;
   width: 2px;
   background-color: lightgray;
 }
