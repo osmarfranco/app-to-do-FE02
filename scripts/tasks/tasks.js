@@ -116,6 +116,7 @@ onload = function () {
     showSkeletons(4, '.tarefas-terminadas')
     getUserData(tokenJwt)
     getUserTasks(tokenJwt)
+    swal("Seja bem vindo!");
   }
 }
 
